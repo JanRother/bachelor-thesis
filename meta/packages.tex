@@ -1,0 +1,66 @@
+% PACKAGE IMPORTS
+
+
+
+% compilation packages
+%\usepackage{morewrites}                                  			% set more write registers, default: 16
+																	% -> use when: "No room for a new \write."
+%\usepackage{silence}												% suppress warnings
+																	% -> use when: /
+
+
+
+% general packages
+\usepackage[top=2.5cm, bottom=2cm, left=3cm, right=2cm]{geometry}   % set page margins
+\usepackage[ngerman]{babel}                                         % set language
+\usepackage[T1]{fontenc}                                            % set font encoding
+\usepackage[nottoc,notlot,notlof]{tocbibind}                        % remove toc, lot and lof from table of contents
+\usepackage[bottom]{footmisc}                                       % set footnotes to bottom of page
+\usepackage{setspace}                                               % set line spacing
+\usepackage{parskip}                                                % set paragraph spacing
+\usepackage{graphicx}                                               % include graphics
+\usepackage{etoolbox}                                               % patch commands
+\usepackage{fancyhdr}                                               % set header and footer
+\usepackage{titlesec}                                               % set title format
+\usepackage[titles]{tocloft}                                        % set table of contents format
+\usepackage{csquotes}                                               % set quotation marks
+\usepackage[
+	backend=biber,					% biber package for compilation
+	citestyle=numeric,				% citation style matching: IEEE
+	bibstyle=numeric,				% citation style matching: IEEE
+	sorting=none,					% sorting: as in document: IEEE
+	%title={Literaturverzeichnis}	% title of bibliography
+]{biblatex}															% set bibliography format
+\usepackage[pdftex, pdfborder={0 0 0}]{hyperref}                    % set hyperlinks
+\usepackage{lmodern}                                                % set font
+\usepackage{color}                                                  % set colors
+\usepackage{xcolor}                                                 % set colors
+\usepackage{xspace}                                                 % set spaces
+\usepackage{caption}                                                % set caption format
+\usepackage{tabulary}                                               % set tables
+\usepackage[acronym, toc]{glossaries}						   		% set glossaries and acronyms
+
+
+
+% TColorbox packages
+% -> documentation: https://texdoc.org/serve/tcolorbox/0
+\usepackage{shellesc}												% required for shell escape
+\usepackage{tcolorbox}												% required for creating colored boxes
+\usepackage{fontawesome}											% required for using icons
+\usepackage{minted}													% required for code listing and syntax highlighting
+																	% -> requires shell escape !
+\tcbuselibrary{skins}												% required for creating custom skins
+\tcbuselibrary{most}												% required for using most features
+\tcbuselibrary{minted}												% required for using minted
+\tcbuselibrary{breakable} 										 	% required for breaking boxes
+
+
+
+% additional packages for development
+\usepackage{comment}												% enable comments in source code
+\ifdraft
+	\usepackage{todonotes}                                          % enable notes
+\else
+	\usepackage[disable]{todonotes}                                 % disable
+\fi
+%\usepackage{showframe} 	                                        % show layout borders

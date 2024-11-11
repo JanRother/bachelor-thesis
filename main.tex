@@ -1,0 +1,91 @@
+% !TEX root = main.tex
+% !TEX option = --shell-escape
+% MAIN DOCUMENT
+
+% In case of renaming this file:
+% adjust the @default_files attribute in the .latexmkrc file
+
+% change meta text values in ./meta/parameters.tex
+% save chapters and corresponding data in ./chapters/XX/
+% save images in ./images/
+% remove ./example/ from the project root and clear references in this file
+% add imports to ./meta/packages.tex, only if necessary
+
+% version from 2024-10
+
+
+
+\documentclass[a4paper, oneside, 11pt]{book}
+\usepackage[utf8]{inputenc}
+
+\newif\ifdraft
+\drafttrue												% flag: marks document as draft and shows to-do-notes, comment or set to "draftfalse"
+
+\input{./meta/packages}									% import packages
+\input{./meta/parameters}								% set meta parameters
+\input{./meta/commands}									% define custom commands and environments
+\input{./meta/header}									% set document header and page layout
+\input{./meta/hyphenation}								% define hyphenation rules
+
+\setcounter{chapter}{-1}								% reset chapter counter to start with 0
+
+\addbibresource{literature.bib}							% import bibliography
+
+\makeglossaries											% create glossary
+\loadglsentries{./main/glossaries.tex}					% load glossary entries
+
+\begin{document}
+
+	%-------------------------------------------------------------------------------
+	% FRONT MATTER
+	%-------------------------------------------------------------------------------
+
+	\listoftodos
+	\input{main/cover}
+
+	\ifbool{thesis}{
+		\input{./main/preface}
+		\input{./main/abstract}
+	}{}
+
+	\input{./main/affidavit}
+
+	\tableofcontents
+	\listoffigures
+	\listoftables
+
+	\printglossary[type=\acronymtype, title=Abkürzungsverzeichnis, style=listdotted]
+	\printglossary[type=\glsdefaulttype, title=Glossar] % style: see meta/header.tex
+
+	%-------------------------------------------------------------------------------
+	% CONTENT
+	%-------------------------------------------------------------------------------
+
+	\mainmatter
+	
+	\input{./chapters/00/introduction-and-motivation}
+	\input{./chapters/01/chapter}
+	\input{./chapters/template/template}				% template for new chapters, remove from main
+	\input{./chapters/example/example}					% example chapter, remove from main
+	\input{./chapters/99/ending-and-conclusion}
+
+	%---------------------------------------------------------------------------
+	% BIBLIOGRAPHY
+	%---------------------------------------------------------------------------
+
+	\clearpage
+	\renewcommand{\bibname}{Literaturverzeichnis}		% set bibliography title, default: Literatur
+	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+	\printbibliography
+	
+	\clearpage
+
+	%---------------------------------------------------------------------------
+	% APPENDIX
+	%---------------------------------------------------------------------------
+
+	\appendix
+	\pagenumbering{Roman}
+	\input{./chapters/AA/attachment}
+
+\end{document}
