@@ -3,12 +3,15 @@
 
 
 % general metadata concerning the scientific work
-\newcommand{\documentCategory}{Projekt\xspace}
-\newcommand{\course}{Modul\xspace}
-\newcommand{\courseAbbreviation}{AKRNM\xspace}
-\newcommand{\semester}{(W|S)S-JJJJ[/YYYY]\xspace}
-\newcommand{\projectdescription}{Projekttitel\xspace}
-\newcommand{\projectshortdescription}{Projektkurzbezeichnung\xspace}
+\newcommand{\documentCategory}{Bachelorarbeit\xspace}
+\newcommand{\course}{\xspace}
+\newcommand{\courseAbbreviation}{\xspace}
+\newcommand{\semester}{\xspace}
+\newcommand{\projectdescription}{
+    Toolchain as Code Strategie zum Überwinden des\\
+    Development-Deployment-Gaps im\\
+    Application Management eines großen Automobilherstellers\xspace}
+\newcommand{\projectshortdescription}{Von der IDE zum Service\xspace}
 
 % flag for single or group work
 % note: there is no integrity check for the students, 
@@ -24,8 +27,8 @@
 \newboolean{studentF} \setboolean{studentF}{false}
 
 % metadata concerning the authors
-\newcommand{\studentAName}{Studierende oder Studierender\xspace}
-\newcommand{\studentAMatNr}{00000000\xspace}
+\newcommand{\studentAName}{Jan Rother\xspace}
+\newcommand{\studentAMatNr}{70476536\xspace}
 \newcommand{\studentBName}{Studierende oder Studierender\xspace}
 \newcommand{\studentBMatNr}{00000000\xspace}
 \newcommand{\studentCName}{Studierende oder Studierender\xspace}
@@ -42,15 +45,15 @@
 \newboolean{tutorB} \setboolean{tutorB}{true}
 
 % metadata concerning the tutor
-\newcommand{\tutorAName}{Dozentin oder Dozent\space}
-\newcommand{\tutorBName}{Betreuerin oder Betreuer\space}
+\newcommand{\tutorAName}{Prof. Dr. Hans Grönniger\space}
+\newcommand{\tutorBName}{Dr. Daniel Fruhner\space}
 
 % metadata concerning the document
-\newcommand{\documentDayOfWeek}{Wochentag\xspace}
-\newcommand{\documentDay}{TT\xspace}
-\newcommand{\documentMonth}{MM\xspace}
-\newcommand{\documentMonthOfYear}{Monat\xspace}
-\newcommand{\documentYear}{JJJJ\xspace}
+\newcommand{\documentDayOfWeek}{Sonntag\xspace}
+\newcommand{\documentDay}{01\xspace}
+\newcommand{\documentMonth}{12\xspace}
+\newcommand{\documentMonthOfYear}{Dezember\xspace}
+\newcommand{\documentYear}{2024\xspace}
 \newcommand{\documentDate}{\documentDayOfWeek, \documentDay.\documentMonth.\documentYear\xspace}
 
 % metadata concerning the university
@@ -61,7 +64,7 @@
 \newcommand{\studies}{Informatik\xspace}
 
 % metadata required if the document is a thesis
-\newboolean{thesis} \setboolean{thesis}{false}
+\newboolean{thesis} \setboolean{thesis}{true}
 
 % metadata concerning the document manager (default: first student)
 \newcommand{\firstAuthor}{\studentAName\xspace}

@@ -5,7 +5,7 @@
 ########## AUTHOR: Jan Rother
 ########## DATE:   2024-10
 
-@default_files = ('main.tex');
+@default_files = ('bachelor-thesis.tex');
 
 # |-------------------- Basic Settings --------------------|
 # General

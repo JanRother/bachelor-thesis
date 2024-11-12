@@ -19,7 +19,7 @@
 \usepackage[utf8]{inputenc}
 
 \newif\ifdraft
-\drafttrue												% flag: marks document as draft and shows to-do-notes, comment or set to "draftfalse"
+\draftfalse												% flag: marks document as draft and shows to-do-notes, comment or set to "draftfalse"
 
 \input{./meta/packages}									% import packages
 \input{./meta/parameters}								% set meta parameters
@@ -65,8 +65,6 @@
 	
 	\input{./chapters/00/introduction-and-motivation}
 	\input{./chapters/01/chapter}
-	\input{./chapters/template/template}				% template for new chapters, remove from main
-	\input{./chapters/example/example}					% example chapter, remove from main
 	\input{./chapters/99/ending-and-conclusion}
 
 	%---------------------------------------------------------------------------
