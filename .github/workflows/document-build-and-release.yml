@@ -12,13 +12,13 @@ on:
     branches:
       - main
       - 'release/**'
+    tags:
+      - thesis
+      - thesis-v*
   pull_request:
     branches:
       - main
       - 'release/**'
-  tags:
-    - thesis
-    - thesis-v*
 
 jobs:
   build_and_release:
