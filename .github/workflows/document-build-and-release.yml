@@ -1,0 +1,50 @@
+############################################################
+########### Workflow: Document Build and Release ###########
+############################################################
+
+########## AUTHOR: Jan Rother
+########## DATE:   2024-11
+
+name: Build and Release PDF Document from LaTeX
+
+on:
+  push:
+    branches:
+      - main
+      - 'release/**'
+  pull_request:
+    branches:
+      - main
+      - 'release/**'
+  tags:
+    - thesis
+    - thesis-v*
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Compile LaTeX Document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: bachelor-thesis.tex
+          docker_image: janrother/latex-environment:latest
+          pre_compile: "tlmgr update --self && tlmgr update --all"
+
+      - name: Upload PDF Document
+        uses: actions/upload-artifact@v4
+        with:
+          name: bachelor-thesis
+          path: out/bachelor-thesis.pdf
+          overwrite: 'true'
+
+      - name: Release PDF Document
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          release_name: Thesis Document
+          tag_name: 'thesis-v${{ github.run_number }}'
