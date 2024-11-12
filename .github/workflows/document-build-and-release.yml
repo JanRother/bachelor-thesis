@@ -12,9 +12,6 @@ on:
     branches:
       - main
       - 'release/**'
-    tags:
-      - thesis
-      - thesis-v*
   pull_request:
     branches:
       - main
@@ -24,10 +21,15 @@ jobs:
   build_and_release:
     runs-on: ubuntu-latest
     steps:
+      - name: Get Date
+        id: date
+        run: echo "::set-output name=DATE::$(date +'%Y-%m-%d')"
+
       - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Compile LaTeX Document
+        id: compile_document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: bachelor-thesis.tex
@@ -35,6 +37,7 @@ jobs:
           pre_compile: "tlmgr update --self && tlmgr update --all && git lfs fetch --all && git lfs pull"
 
       - name: Upload PDF Document
+        id: upload_document
         uses: actions/upload-artifact@v4
         with:
           name: bachelor-thesis
@@ -42,9 +45,25 @@ jobs:
           overwrite: 'true'
 
       - name: Release PDF Document
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          TAG_NAME: 'thesis_${{ steps.date.outputs.DATE }}'
+          RELEASE_NAME: 'Bachelor Thesis (${{ steps.date.outputs.DATE }})'
         with:
-          release_name: Thesis Document
-          tag_name: 'thesis-v${{ github.run_number }}'
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.RELEASE_NAME }}
+          draft: false
+          prerelease: false
+
+      - name: Upload PDF Document to Release
+        id: upload_release
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: out/bachelor-thesis.pdf
+          asset_name: bachelor-thesis.pdf
+          asset_content_type: application/pdf
