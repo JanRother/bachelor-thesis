@@ -32,7 +32,7 @@ jobs:
         with:
           root_file: bachelor-thesis.tex
           docker_image: janrother/latex-environment:latest
-          pre_compile: "tlmgr update --self && tlmgr update --all"
+          pre_compile: "tlmgr update --self && tlmgr update --all && git lfs fetch --all && git lfs pull"
 
       - name: Upload PDF Document
         uses: actions/upload-artifact@v4
