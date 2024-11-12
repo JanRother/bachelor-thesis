@@ -27,7 +27,7 @@
 \input{./meta/header}									% set document header and page layout
 \input{./meta/hyphenation}								% define hyphenation rules
 
-\setcounter{chapter}{-1}								% reset chapter counter to start with 0
+%\setcounter{chapter}{-1}								% reset chapter counter to start with 0
 
 \addbibresource{literature.bib}							% import bibliography
 
@@ -63,9 +63,14 @@
 
 	\mainmatter
 	
-	\input{./chapters/00/introduction-and-motivation}
-	\input{./chapters/01/chapter}
-	\input{./chapters/99/ending-and-conclusion}
+	\input{./chapters/01/_introduction-and-motivation.tex}
+	\input{./chapters/02/_technological-environment.tex}
+	\input{./chapters/03/_examination-of-existing-approaches.tex}
+	\input{./chapters/04/_requirements-for-development-and-deployment-environments.tex}
+	\addtocontents{toc}{\protect\newpage}
+	\input{./chapters/05/_toolchain-as-code.tex}
+	\input{./chapters/06/_prototypical-implementation-of-the-concept.tex}
+	\input{./chapters/07/_conclusion-and-outlook.tex}
 
 	%---------------------------------------------------------------------------
 	% BIBLIOGRAPHY
@@ -84,6 +89,7 @@
 
 	\appendix
 	\pagenumbering{Roman}
-	\input{./chapters/AA/attachment}
+	\input{./chapters/AA/_expert-interviews.tex}
+	\input{./chapters/BB/_source-code-of-prototype.tex}
 
 \end{document}
