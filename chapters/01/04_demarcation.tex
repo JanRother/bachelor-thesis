@@ -1,5 +1,12 @@
 \section{Abgrenzung}
 \label{sec:01-04_demarcation}
 
-% place content here
-Inhalt
+Der Rahmen dieser Arbeit und somit auch die zu entwickelnde Strategie bewegen sich grundsätzlich in den Bereichen \nameref{sec:02-01_web-development}, \nameref{sec:02-02_microservices} und \nameref{sec:02-03_containerization}. Im Fokus stehen außerdem Neuentwicklungen von Software, wohingegen eine Strategie für \Glspl{legacy-system} nicht beleuchtet werden soll.
+
+Für Projekte aus mehreren Repositories soll es möglich sein, die Strategie anzuwenden, wenngleich dieser Aspekt nicht gesondert diskutiert wird. Unternehmensinterne Herausforderungen wie zum Beispiel \Glspl{vpn}, Proxies, Mirrors oder Certificates sollen nicht gezielt behandelt werden.
+
+Anspruch an die Toolchain-as-Code Strategie soll nicht sein, eine vollständige Durchgängigkeit zwischen \Gls{development} und \Gls{deployment} zu erreichen. Vielmehr ist es Ziel dieser Arbeit, sich diesem Idealfall im Rahmen des technisch und organisatorisch Sinnvollen möglichst stark anzunähern.
+
+\Gls{delivery} bezeichnet die Auslieferung von solcher Software an den Kunden, welche das \Gls{deployment} bereits durchlaufen hat. Im Verständnis der Arbeit ist sie somit der auf das \Gls{deployment} folgende Schritt. Diesen Bereich mit der geplanten Strategie abzudecken, würde den Rahmen der Arbeit sprengen, weshalb er keine unmittelbare Berücksichtigung erfahren soll.
+
+Eine weitere Abgrenzung muss gegenüber nicht-funktionalen Aspekten wie Testbarkeit, Sicherheit, Wartbarkeit und Performanz von Software getätigt werden. Diese Aspekte spielen zwar in Teilen eine Rolle und finden unter der \acrlong{rq} \textbf{RQ-3} Berücksichtigung, hier jedoch nur mit Fokus auf \nameref{sec:02-03_containerization}. Bei den Begriffen handelt es sich um eigene, sehr komplexe und spezifische Themen, weshalb sie in dieser Arbeit nicht erschöpfend behandelt werden sollen.
