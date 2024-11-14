@@ -2,18 +2,35 @@
 
 
 
-% glossary entries
+% ------------------------------------------------
+% GLOSSARIES
 
-\newglossaryentry{markupsprache}{
-    name={Markupsprache},
-    description={reichert Texte mit zusätzlichen Informationen an}}
-\newglossaryentry{latex}{
-    name={LaTeX},
-    description={ist eine \Gls{markupsprache}, die häufig in der Wissenschaft und Technik verwendet wird}}
+\newglossaryentry{developer-experience}{
+    name={Developer Experience},
+    description={wird beeinflusst durch verschiedene Faktoren, die Personen, welche in Aktivitäten der Softwareentwicklung eingebunden sind, betreffen, wobei ein unmittelbarer Einfluss auf Ergebnisse von Softwareentwicklungsprojekten besteht \cite{017:Developer-Experience-Concept-and-Definition}}
+}
+
+\newglossaryentry{deployment}{
+    name={Deployment},
+    description={bezeichnet die Installation von gebauter Software in bestimmten Umgebungen, aber nicht notwendigerweise deren Bereitstellung für tatsächliche Nutzer \cite{005:Continous-Software-Engineering-and-Beyond}}
+}
+
+\newglossaryentry{cloud-native}{
+    name={cloud-native},
+    description={beschreibt einen Ansatz zum Bauen, Deployen und Verwalten von modernen Applikationen in Cloud Umgebungen \cite{011:Cloud-Native-CI-CD-Platform,110:Cloud-Native}, wobei Software entsteht, die skalierbar, flexibel und resilient ist \cite{110:Cloud-Native}}
+}
+
+\newglossaryentry{prompt-engineering}{
+    name={Prompt Engineering},
+    description={bezeichnet einen Prozess, bei welchem durch Optimierung und Veränderung der zur Generierung von Inhalten eingegebenen Daten die Qualität von Ergebnissen Generativer Künstlicher Intelligenzen verbessert werden kann \cite{900:Herausforderungen-Strategien-Kuenstliche-Intelligenz-Software-Engineering}}
+}
 
 
 
-% acronyms
+% ------------------------------------------------
+% ACRONYMS
 
-\newacronym[shortplural=Abken, longplural=Abkürzungen]{abk}{Abk}{Abkürzung}
-\newacronym{ide}{IDE}{Integrated Development Environment}
+\newacronym[shortplural=IDEs, longplural=Integrated Development Environments]{ide}{IDE}{Integrated Development Environment}
+\newacronym[shortplural=VCSs, longplural=Version Control Systems]{vcs}{VCS}{Version Control System}
+\newacronym{ci}{CI}{Continous Integration}
+\newacronym{cd}{CD}{Continous Deployment}
