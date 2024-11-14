@@ -1,5 +1,24 @@
 \section{Zielsetzung und Forschungsfragen}
 \label{sec:01-03_objectives-and-research-questions}
 
-% place content here
-Inhalt
+Für die im Abschnitt \nameref{sec:01-01_background} beschriebenen Probleme und Herausforderungen wird der Begriff \qbf{Development-Deployment-Gap} eingeführt. \Gls{development} \glsdesc{development}. Hier besteht der größte Kontaktpunkt mit Entwicklern. \Gls{deployment} \glsdesc{deployment}. Der Begriff wird in Literatur und Praxis häufig verschieden definiert beziehungsweise interpretiert. Im Kontext dieser Arbeit meint er die Ablage erfolgreich gebauter Artefakte an einem bestimmten Ort, aber explizit nicht ihre Bereitstellung für mögliche Kunden.
+
+In allen diesen Bereichen spielen die ebenfalls im \nameref{sec:01-01_background} angesprochenen Werkzeuge eine große Rolle. Sie werden im folgenden als \qbf{Tools} bezeichnet und meinen Software oder Softwarekomponenten, die Entwickler auf allen möglichen Ebenen zwischen \Gls{development} und \Gls{deployment} nutzen. Tools unterstützen sie bei einzelnen oder mehrerern Aufgaben. Bei einer \qbf{Toolchain} handel es sich um den Verbund mehrer Tools, die in einem gleichen Kontext oder Projekt genutzt werden. Software und Tools formen zusammen Umgebungen: \qbf{Developmentumgebungen} im \Gls{development} und \qbf{Deploymentumgebungen} im \Gls{deployment}.
+
+Ziel der Arbeit ist die Entwicklung einer \qbf{Toolchain-as-Code Strategie}. Die Erwartung an eine solche Strategie ist ihr Beitrag zur Beseitigung von Hindernissen und Problemräumen, zur Erhöhung von Produktivität und Zufriedenheit der Entwickler sowie zur Erreichung einer gewissen Durchgängigkeit von Tools zwischen Development- und Deploymentumgebungen.
+
+Die Zielerreichung soll dabei über den Fokus auf vier zentrale \Glspl{rq} gelingen:
+
+\vspace{1em}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{p{0.1\textwidth} p{0.8\textwidth}}
+        \textbf{RQ-0} & Welche Anforderungen an Development- und Deploymentumgebungen haben Entwickler und Administratoren, die diese Bereiche im Rahmen von Softwareprojekten mit Microservices Architektur verantworten? \\[2em]
+        \textbf{RQ-1} & Welche Ansätze für das Application Management bestehen bereits, um Software sicher, wartbar, performant und in kurzen Abständen zu entwickeln und auszuliefern? Welche Grenzen haben diese Ansätze gegebenenfalls im Kontext des Ziels dieser Arbeit? \\[2em]
+        \textbf{RQ-2} & Wie kann eine Toolchain-as-Code Strategie bestehende Ansätze kombinieren, um die Lücke zwischen \Gls{development} und \Gls{deployment} zu schließen, manuelle Schritte im Rahmen der Toolchain zu reduzieren und dabei gleichermaßen eine effiziente Konfiguration von Softwareprojekten zu ermöglichen? \\[2em]
+        \textbf{RQ-3} & Was sind Best Practices beim Einrichten von Development- und Deploymentumgebungen, die Sicherheit, Wartbarkeit und Performanz begünstigen? \\
+    \end{tabular}
+\end{table}
+\vspace{1em}
+
+Diese Fragen sollen zur Entwicklung einer Strategie wie beschrieben beitragen.
