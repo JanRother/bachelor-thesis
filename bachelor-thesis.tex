@@ -51,8 +51,6 @@
 	\input{./main/affidavit}
 
 	\tableofcontents
-	\listoffigures
-	\listoftables
 
 	\printglossary[type=\acronymtype, title=Abkürzungsverzeichnis, style=listdotted]
 	\printglossary[type=\glsdefaulttype, title=Glossar] % style: see meta/header.tex
@@ -80,6 +78,9 @@
 	\renewcommand{\bibname}{Literaturverzeichnis}		% set bibliography title, default: Literatur
 	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
 	\printbibliography
+
+	\listoffigures
+	\listoftables
 	
 	\clearpage
 
