@@ -4,7 +4,7 @@
 
 ////////// AUTHOR:  Jan Rother
 ////////// DATE:    2024-11
-////////// VERSION: 1.1
+////////// VERSION: 1.2
 
 {
   "name": "LaTeX",
@@ -75,7 +75,9 @@
         // PlantUML
         "jebbs.plantuml",
         // Grammarly
-        "znck.grammarly"
+        "znck.grammarly",
+        // Conventional Commits
+        "vivaxy.vscode-conventional-commits"
       ]
     },
     // --- JetBrains IDEs ---
