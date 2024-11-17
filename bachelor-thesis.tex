@@ -34,6 +34,10 @@
 \makeglossaries											% create glossary
 \loadglsentries{./main/glossaries.tex}					% load glossary entries
 
+\DefineBibliographyStrings{ngerman}{					% define bibliography strings for german language:
+    andothers = {\acrshort{etal}}						% - string for \citeauthor of more than three authors
+}
+
 \graphicspath{{images/}}								% set graphics path
 
 \begin{document}
