@@ -29,7 +29,7 @@ Grundsätzlich werden bei GitOps zwei Ansätze für deklaratives \Gls{deployment
     \item \textbf{Pull-based} Deployment.
 \end{itemize}
 
-Ausgangspunkt eines Durchlaufs der Pipelines sind in beiden Fällen Änderungen am Application Repository. Bis zum Ablegen der vollständig gebauten Software beziehungsweise ihrer Umgebung in Form von Container \Glspl{image} in einem Repository sind beide Ansätze identisch. Zunächst lösen Änderungen am Application Repository, beispielsweise in Form eines Pushs oder eines Merge Requests die Build Pipeline aus. Diese stellt die resultierenden Container \Glspl{image} in einer \Gls{container-registry} bereit und aktualisiert anschließend die verwandten Einträge im Environment Repository. \cite{007:Analysis-of-Declarative-and-Pull-based-Deployment-Models-on-GitOps} Der Unterschied liegt nun darin, wie Applikation und Umgebung auf Änderungen reagieren und wodurch diese Änderungen erkannt werden.
+Ausgangspunkt eines Durchlaufs der Pipelines sind in beiden Fällen Änderungen am Application Repository. Bis zum Ablegen der vollständig gebauten Software beziehungsweise ihrer Umgebung in Form von Container \Glspl{image} in einem Repository sind beide Ansätze identisch. Zunächst lösen Änderungen am Application Repository, beispielsweise in Form eines Pushs oder eines Merge Requests die \Gls{build} Pipeline aus. Diese stellt die resultierenden Container \Glspl{image} in einer \Gls{container-registry} bereit und aktualisiert anschließend die verwandten Einträge im Environment Repository. \cite{007:Analysis-of-Declarative-and-Pull-based-Deployment-Models-on-GitOps} Der Unterschied liegt nun darin, wie Applikation und Umgebung auf Änderungen reagieren und wodurch diese Änderungen erkannt werden.
 
 \begin{figure}[h]
     \centering
