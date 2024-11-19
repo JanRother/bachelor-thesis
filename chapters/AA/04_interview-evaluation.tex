@@ -1,0 +1,342 @@
+\section{Interviewauswertung}
+\label{sec:AA-04_interview-evaluation}
+
+Die Auswertung der Interviews erfolgt anhand der in den vorherigen Abschnitten dokumentierten Ergebnisse. Ziel ist die Zuordnung der Aussagen zu genau einer von vier möglichen Kategorien:
+
+\begin{itemize}
+    \item \hyperref[subsec:AA-04-01_requirements-development]{Anforderungen an Toolchains im Bereich \textbf{Development}},
+    \item \hyperref[subsec:AA-04-02_requirements-deployment]{Anforderungen an Toolchains im Bereich \textbf{Deployment}},
+    \item \hyperref[subsec:AA-04-03_requirements-continuity]{Anforderungen an die \textbf{Durchgängigkeit} von Toolchains}, oder
+    \item \hyperref[subsec:AA-04-04_requirements-general]{\textbf{Allgemeine} Anforderungen}.
+\end{itemize}
+
+Dabei behalten sie den im vorherigen Abschnitt zu den \nameref{sec:AA-03_interview-results} vergebenen Zuordnungszusatz bei. Weiterhin werden alle Aussagen innerhalb ihres Anforderungebsereichs in Anforderungsgruppen zusammengefasst. Über diese Gruppen soll ermöglicht werden, aus dem Querschnitt aller in ihr enthaltenen Aussagen eine möglichst umfassende Anforderung an Toolchains abzuleiten. Diese Anforderungsgruppen werden anschließend gewichtet und absteigend nach ihrer Priorität sortiert. Als Indikator für die Gewichtung einer Anforderungsgruppe dient die Anzahl der in ihr enthaltenen Aussagen, wobei mehrfach getroffene Aussagen auch entsprechend mehrfach einfließen. Zusätzlich wird jeder Anforderungsgruppe, sofern passend, einer oder mehrere Faktoren aus dem Konzept der \q{Twelve-Factor App} zugeordnet, der als Referenz bei der methodischen Auswertung unterstützen kann.
+
+\subsection{Anforderungen an Toolchains im Bereich Development}
+\label{subsec:AA-04-01_requirements-development}
+
+\subsubsection{Entwicklungsumgebung}
+\label{subsubsec:AA-04-01-01_req-dev-development-environment}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   09 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   X: Dev / Prod Parity    \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Aufsetzen der Entwicklungsumgebung ist sehr wichtig \mbox{\textbf{\{1: IP-1\}}}
+        \item Installation der Entwicklungsumgebung hat Optimierungspotential \mbox{\textbf{\{1: IP-3\}}}
+        \item Entwicklungsumgebung sollte möglichst vollständig geladen werden \mbox{\textbf{\{2: IP-1, IP-3\}}}
+        \item Tools sind einheitlich vorgegeben \mbox{\textbf{\{1: IP-2\}}}
+        \item fehlende Administratorrechte sind eine Herausforderung \mbox{\textbf{\{1: IP-0\}}}
+        \item verwendete Tools sind
+        \begin{itemize}
+            \item \textit{Git} \mbox{\textbf{\{4: IP-0, IP-1, IP-2 IP-3\}}}
+            \item \textit{Docker} \mbox{\textbf{\{3: IP-0, IP-1, IP-3\}}}
+            \item \textit{Unix}-Tools \mbox{\textbf{\{1: IP-1\}}}
+            \item VCS (\textit{Git}) \mbox{\textbf{\{1: IP-2\}}}
+        \end{itemize}
+        \item Plugins für Editor oder integrierte Entwicklungsumgebung \linebreak[2] sind installiert \mbox{\textbf{\{2: IP-1, IP-2\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Ausführbarkeit}
+\label{subsubsec:AA-04-01-02_req-dev-executability}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   08 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   I: Codebase             \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Software wird in der Regel nach Anpassungen \linebreak[4] das erste Mal lokal ausgeführt \mbox{\textbf{\{4: IP-0, IP-1, IP-2, IP-3\}}}
+        \item Einrichtung des Projekts lokal mit \linebreak[4] erster Ausführung hat Optimierungspotential \mbox{\textbf{\{1: IP-2\}}}
+        \item Einrichtung und Start des Projekts lokal ist Schritt bei der Einrichtung \mbox{\textbf{\{2: IP-2, IP-3\}}}
+        \item Einrichtung und Start der Tests lokal ist Schritt bei der Einrichtung \mbox{\textbf{\{1: IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Konfiguration}
+\label{subsubsec:AA-04-01-03_req-dev-configuration}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   07 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   III: Config             \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item teilweise hoher Konfigurationsbedarf ist eine Herausforderung \mbox{\textbf{\{1: IP-2\}}}
+        \item Konfigurationsaufwand sollte gering sein \mbox{\textbf{\{1: IP-1\}}}
+        \item Konfiguration erfolgt über versionierte Dateien \mbox{\textbf{\{2: IP-2, IP-3\}}}
+        \item Konfiguration der integrierten Entwicklungsumgebung beziehungsweise des Editors \linebreak[1] erfolgt über ein entsprechendes Konfigurationsverzeichnis im VCS \mbox{\textbf{\{1: IP-1\}}}
+        \item Setzen der Umgebungsvariablen ist Schritt bei der Einrichtung \mbox{\textbf{\{1: IP-1\}}}
+        \item Hinzufügen von Umgebungsvariablen aus der Config ist nicht automatisierbar \mbox{\textbf{\{1: IP-2\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Abhängigkeiten}
+\label{subsubsec:AA-04-01-04_req-dev-dependencies}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   06 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   II: Dependencies        \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Installation von SDKs hat Optimierungspotential \mbox{\textbf{\{1: IP-1\}}}
+        \item Installation von Dependencies hat Optimierungspotential \mbox{\textbf{\{2: IP-0, IP-3\}}}
+        \item Dependencies sollten einfach einsehbar und verwaltbar sein \mbox{\textbf{\{1: IP-0\}}}
+        \item unterschiedliche Versionen von SDKs \linebreak[1] in verschiedenen Projekten sind eine Herausforderung \mbox{\textbf{\{1: IP-0\}}}
+        \item Installation der Abhängigkeiten sollte über Paketmanager erfolgen \mbox{\textbf{\{1: IP-1\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Dokumentation}
+\label{subsubsec:AA-04-01-05_req-dev-documentation}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   04 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   -/-                     \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Einrichtung eines einfachen und verständlichen Setups ist sehr wichtig \mbox{\textbf{\{1: IP-3\}}}
+        \item veraltete Dokumentation ist eine Herausforderung \mbox{\textbf{\{1: IP-2\}}}
+        \item Lesen und Befolgen der Dokumentation ist Schritt bei der Einrichtung \mbox{\textbf{\{2: IP-2, IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Skripte}
+\label{subsubsec:AA-04-01-06_req-dev-scripts}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   02 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   V: Build, Release, Run  \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Shell-Skripte erledigen bestimmte Aufgaben \mbox{\textbf{\{1: IP-3\}}}
+        \item veraltete Skripte sind eine Herausforderung \mbox{\textbf{\{1: IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Sonstiges}
+\label{subsubsec:AA-04-01-07_req-dev-miscellaneous}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Einrichtung von CA-Zertifikaten ist Schritt bei der Einrichtung \mbox{\textbf{\{1: IP-0\}}}
+        \item Standards und Konventionen sollten eingehalten werden \mbox{\textbf{\{2: IP-2, IP-3\}}}
+        \begin{itemize}
+            \item \textit{Git Workflow} \mbox{\textbf{\{1: IP-2\}}}
+            \item \textit{Google Java Styleguide} \mbox{\textbf{\{1: IP-2\}}}
+        \end{itemize}
+        \item Onboarding neuer Entwickler im Hinblick auf Toolchains dauert
+        \begin{itemize}
+            \item $ < 01 h $ in neuem Projekt \mbox{\textbf{\{1: IP-0\}}}
+            \item $ \sim 08 h $ (1 Tag) in neuem Projekt \mbox{\textbf{\{2: IP-1, IP-3\}}}
+            \item $ \sim 16 h - 24 h $ (2 - 3 Tage) in neuem Projekt \mbox{\textbf{\{1: IP-2\}}}
+        \end{itemize}
+    \end{itemize}
+\end{flushleft}
+
+\subsection{Anforderungen an Toolchains im Bereich Deployment}
+\label{subsec:AA-04-02_requirements-deployment}
+
+\subsubsection{Automatisierung}
+\label{subsubsec:AA-04-02-01_req-dep-automation}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   06 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   V: Build, Release, Run  \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Deployment ist maximal automatisiert \mbox{\textbf{\{1: IP-2\}}}
+        \item Evolution eines eigenen Artefakts auf die nächste Stage \linebreak[1] ist Schritt bei der Einrichtung \mbox{\textbf{\{1: IP-2\}}}
+        \item verwendete Tools sind
+        \begin{itemize}
+            \item Pipeline Tools (\textit{GitHub Actions}) \mbox{\textbf{\{1: IP-3\}}}
+            \item Deployment Tools (\textit{Argo CD}) \mbox{\textbf{\{1: IP-2\}}}
+            \item Container Orchestration Tools (\textit{Kubernetes}) \mbox{\textbf{\{1: IP-2\}}}
+            \item Infrastructure-as-Code (IaC) für Umgebungen und Pipelines \mbox{\textbf{\{1: IP-3\}}}
+        \end{itemize}
+        \item Bestätigung beim Deployment auf Produktivumgebungen oder Stages \linebreak[1] ist nicht automatisierbar \mbox{\textbf{\{3: IP-0, IP-1, IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Konfiguration}
+\label{subsubsec:AA-04-02-02_req-dep-configuration}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   02 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   III: Config             \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Konfiguration erfolgt über versionierte Dateien \mbox{\textbf{\{2: IP-2, IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Containerization}
+\label{subsubsec:AA-04-02-03_req-dep-containerization}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   01 Gewichtungspunkt     \\
+    \textbf{Faktor:}        &   -/-                     \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Deployment sollte bestenfalls per Container oder serverless erfolgen \mbox{\textbf{\{1: IP-1\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Qualität und Sicherheit}
+\label{subsubsec:AA-04-02-04_req-dep-quality-security}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   01 Gewichtungspunkt     \\
+    \textbf{Faktor:}        &   -/-                     \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Fast Feedback und Alerting ermöglichen \linebreak[1] schnelle Reaktion der Entwickler \mbox{\textbf{\{1: IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsection{Anforderungen an die Durchgängigkeit von Toolchains}
+\label{subsec:AA-04-03_requirements-continuity}
+
+\subsubsection{Tools und Skripte}
+\label{subsubsec:AA-04-03-01_req-cnt-tools-scripts}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   05 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   V: Build, Release, Run  \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Task-Files im Repository \mbox{\textbf{\{1: IP-0\}}}
+        \item Bash-Skripte im Repository \mbox{\textbf{\{2: IP-0, IP-1\}}}
+        \item Build Tools (\textit{Maven}) \mbox{\textbf{\{2: IP-2, IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Parität}
+\label{subsubsec:AA-04-03-02_req-cnt-parity}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   03 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   X: Dev / Prod Parity    \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item lokale Umgebung ist möglichst nah an der Produktivumgebung \mbox{\textbf{\{1: IP-3\}}}
+        \item Tools sollten plattformübergreifend funktionieren \mbox{\textbf{\{1: IP-0\}}}
+        \item Vorhandensein einer eindeutigen Config ist gegeben \mbox{\textbf{\{1: IP-0\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Anpassbarkeit}
+\label{subsubsec:AA-04-03-03_req-cnt-adaptability}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   02 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   III: Config             \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Umgebung sollte durch das Entwicklungsteam anpassbar sein \mbox{\textbf{\{1: IP-3\}}}
+        \item Vermeidung unnötiger Komplexität von Beginn an ist ein Ziel \mbox{\textbf{\{1: IP-3\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Reproduzierbarkeit}
+\label{subsubsec:AA-04-03-04_req-cnt-reproducibility}
+
+\vspace{0.5em}
+\begin{tabular}{ll@{}ll@{}}
+    \textbf{Gewichtung:}    &   02 Gewichtungspunkte    \\
+    \textbf{Faktor:}        &   X: Dev / Prod Parity    \\
+\end{tabular}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item fehlende Reproduzierbarkeit ist eine Herausforderung \mbox{\textbf{\{1: IP-2\}}}
+        \item Existenz eines einzigen Commands \linebreak[1] zum Starten der Infrastruktur ist wichtig \mbox{\textbf{\{1: IP-0\}}}
+    \end{itemize}
+\end{flushleft}
+
+\subsection{Allgemeine Anforderungen}
+\label{subsec:AA-04-04_requirements-general}
+
+\subsubsection{Ziele}
+\label{subsubsec:AA-04-04-01_req-gen-goals}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Ziele mit großer Priorität
+        \begin{itemize}
+            \item Reduzierung von manuellem Aufwand \mbox{\textbf{\{1: IP-1\}}}
+            \item Reduzierung des Arbeitsaufwands \mbox{\textbf{\{1: IP-2\}}}
+            \item Einfachheit \mbox{\textbf{\{1: IP-3\}}}
+            \item Containerisierung \mbox{\textbf{\{1: IP-0\}}}
+        \end{itemize}
+        \item Ziele mit mittlerer Priorität
+        \begin{itemize}
+            \item Senkung der Einstiegskurve \mbox{\textbf{\{1: IP-1\}}}
+            \item starke Anpassbarkeit \mbox{\textbf{\{1: IP-2\}}}
+            \item 12-Faktor-Prinzipien \mbox{\textbf{\{1: IP-0\}}}
+            \item Unterstützung von Fast Feedback \mbox{\textbf{\{1: IP-3\}}}
+        \end{itemize}
+        \item Ziele mit geringer Priorität
+        \begin{itemize}
+            \item Einräumen von Freiheiten für neue Entwickler \mbox{\textbf{\{1: IP-1\}}}
+            \item Toolchain entspricht einem (Unternehmens-)Standard \mbox{\textbf{\{1: IP-2\}}}
+            \item Stabilität \mbox{\textbf{\{1: IP-3\}}}
+            \item Verwendung einer Sprache mit Typprüfung \linebreak[1] und minimalen externen Abhängigkeiten \mbox{\textbf{\{1: IP-0\}}}
+        \end{itemize}
+    \end{itemize}
+\end{flushleft}
+
+\subsubsection{Sonstiges}
+\label{subsubsec:AA-04-04-02_req-gen-miscellaneous}
+
+\begin{flushleft}
+    \begin{itemize}
+        \item Anteil nicht automatisierbarer Schritte liegt zwischen 5 \% und 20 \%
+        \item Toolchains sind je nach Umfeld unterschiedlich flexibel
+        \begin{itemize}
+            \item im Application Management eher weniger austauschbar
+            \item im Software Development Center eher flexibler
+        \end{itemize}
+        \item Anpassungen an der Umgebung sind wenig bis selten notwendig
+        \item Tools und Bibliotheken werden unterschiedlich häufig ausgetauscht
+    \end{itemize}
+\end{flushleft}

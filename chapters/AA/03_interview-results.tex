@@ -1,0 +1,333 @@
+\section{Interviewergebnisse}
+\label{sec:AA-03_interview-results}
+
+Die Dokumentation der Interviewergebnisse nutzt die gleichen Identifikationen für die \nameref{sec:AA-01_interview-questions} und die \nameref{sec:AA-02_interview-persons} wie bereits in den vorherigen Abschnitten definiert. Die Reihenfolge der Interviewfragen ist unverändert, die Antworten der Interviewpersonen sind in den jeweiligen Abschnitten zusammengefasst. Dabei ist jede Antwort protokolliert, die von einer Interviewperson zu einer Interviewfrage gegeben wurde. Wurde eine Antwort in gleicher oder ähnlicher Form von mehreren Interviewpersonen gegeben, so wurde sie zusammengefasst und mit den entsprechenden Identifikationen versehen. Die Zuordnung einer Antwort erfolgt dabei über den folgenden Zusatz:
+
+\begin{quote}
+    \begin{verbatim}
+        {<Anzahl>: <Interviewperson-x>, <Interviewperson-y>, ...}
+    \end{verbatim}
+\end{quote}
+
+Dabei gibt die \texttt{Anzahl} an, wie viele Interviewpersonen die Antwort in gleicher oder ähnlicher Form gegeben haben. Hinter dem Doppelpunkt folgen anschließend die Identifikationen der Interviewpersonen, die die Antwort gegeben haben.
+
+\clearpage
+
+\subsection{Offene Fragen}
+\label{subsec:AA-03-01_open-questions}
+
+\begin{longtable}{ >{\raggedright\bfseries}p{0.2\textwidth} p{0.7\textwidth} }
+    IQ-A0 (Eins) & 
+    Wenn Sie sich eine ideale Development- beziehungsweise Deploymentumgebung vorstellen, was wären die wichtigsten Merkmale, die sie auszeichnen würde? \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Dependencies sollten einfach einsehbar und verwaltbar sein \mbox{\textbf{\{1: IP-0\}}}
+            \item Konfigurationsaufwand sollte gering sein \mbox{\textbf{\{1: IP-1\}}}
+            \item Konfiguration erfolgt über versionierte Dateien \mbox{\textbf{\{2: IP-2, IP-3\}}}
+            \item Entwicklungsumgebung sollte möglichst \linebreak[1] vollständig geladen werden \mbox{\textbf{\{2: IP-1, IP-3\}}}
+            \item Shell-Skripte erledigen bestimmte Aufgaben \mbox{\textbf{\{1: IP-3\}}}
+            \item Tools sind einheitlich vorgegeben \mbox{\textbf{\{1: IP-2\}}}
+            \item lokale Umgebung ist möglichst nah an der Produktivumgebung \mbox{\textbf{\{1: IP-3\}}}
+            \item Deployment sollte bestenfalls per Container oder serverless erfolgen \mbox{\textbf{\{1: IP-1\}}}
+            \item Deployment ist maximal automatisiert \mbox{\textbf{\{1: IP-2\}}}
+            \item Fast Feedback und Alerting ermöglichen \linebreak[1] schnelle Reaktion der Entwickler \mbox{\textbf{\{1: IP-3\}}}
+            \item Umgebung sollte durch das Entwicklungsteam anpassbar sein \mbox{\textbf{\{1: IP-3\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-A1 (Drei) &
+    Welche Herausforderungen oder Hindernisse treten typischerweise bei der Einrichtung und Nutzung Ihrer Entwicklungs- oder Deploymentumgebungen auf? \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item fehlende Reproduzierbarkeit \mbox{\textbf{\{1: IP-2\}}}
+            \item teilweise hoher Konfigurationsbedarf \mbox{\textbf{\{1: IP-2\}}}
+            \item unterschiedliche Versionen von SDKs in verschiedenen Projekten \mbox{\textbf{\{1: IP-0\}}}
+            \item Einrichtung von CA-Zertifikaten \mbox{\textbf{\{1: IP-0\}}}
+            \item fehlende Administratorrechte \mbox{\textbf{\{1: IP-0\}}}
+            \item veraltete Dokumentation \mbox{\textbf{\{1: IP-2\}}}
+            \item veraltete Skripte \mbox{\textbf{\{1: IP-3\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-A2 (Zwei) &
+    Bezogen auf die einzelnen Schritte, wie gehen Sie üblicherweise bei der Konfiguration der einzelnen Werkzeuge Ihrer Entwicklungs- beziehungsweise Deploymentumgebungen vor? \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Lesen und Befolgen der Dokumentation \mbox{\textbf{\{2: IP-2, IP-3\}}}
+            \item Installation lokaler Tools wie Git und Docker \mbox{\textbf{\{3: IP-0, IP-1, IP-3\}}}
+            \item Setzen der Umgebungsvariablen \mbox{\textbf{\{1: IP-1\}}}
+            \item Konfiguration der integrierten Entwicklungsumgebung / des Editors \linebreak[1] über ein entsprechendes Konfigurationsverzeichnis im VCS \mbox{\textbf{\{1: IP-1\}}}
+            \item Installation der Abhängigkeiten über Paketmanager \mbox{\textbf{\{1: IP-1\}}}
+            \item Einrichtung und Start des Projekts lokal \mbox{\textbf{\{2: IP-2, IP-3\}}}
+            \item Einrichtung und Start der Tests lokal \mbox{\textbf{\{1: IP-3\}}}
+            \item Evolution eines eigenen Artefakts auf die nächste Stage \mbox{\textbf{\{1: IP-2\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-A3 (Eins) &
+    Was sind typische Komponenten, Werkzeuge oder andere Elemente Ihrer Entwicklungs- oder Deploymentumgebungen? \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Task-Files im Repository \mbox{\textbf{\{1: IP-0\}}}
+            \item Bash-Skripte im Repository \mbox{\textbf{\{2: IP-0, IP-1\}}}
+            \item \textit{Unix}-Tools \mbox{\textbf{\{1: IP-1\}}}
+            \item VCS (\textit{Git}) \mbox{\textbf{\{1: IP-2\}}}
+            \item Build Tools (\textit{Maven}) \mbox{\textbf{\{2: IP-2, IP-3\}}}
+            \item Plugins für Editor oder integrierte Entwicklungsumgebung \mbox{\textbf{\{2: IP-1, IP-2\}}}
+            \begin{itemize}
+                \item \textit{SonarLint} \mbox{\textbf{\{1: IP-2\}}}
+            \end{itemize}
+            \item Pipeline Tools (\textit{GitHub Actions}) \mbox{\textbf{\{1: IP-3\}}}
+            \item Deployment Tools (\textit{Argo CD}) \mbox{\textbf{\{1: IP-2\}}}
+            \item Container Orchestration Tools (\textit{Kubernetes}) \mbox{\textbf{\{1: IP-2\}}}
+            \item Infrastructure-as-Code (IaC) für Umgebungen und Pipelines \mbox{\textbf{\{1: IP-3\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-A4 (Fünf) &
+    Gibt es spezifische Anforderungen oder Standards, die Sie bei der Nutzung Ihrer Entwicklungs- und Deploymentumgebungen erfüllen müssen? \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Tools sollten plattformübergreifend funktionieren \mbox{\textbf{\{1: IP-0\}}}
+            \item Standards und Konventionen sollten eingehalten werden \mbox{\textbf{\{2: IP-2, IP-3\}}}
+            \begin{itemize}
+                \item \textit{Git Workflow} \mbox{\textbf{\{1: IP-2\}}}
+                \item \textit{Google Java Styleguide} \mbox{\textbf{\{1: IP-2\}}}
+            \end{itemize}
+        \end{itemize}
+    } \\
+\end{longtable}
+
+\clearpage
+
+\subsection{Halb-offene Fragen}
+\label{subsec:AA-03-02_half-open-questions}
+
+\begin{longtable}{ >{\raggedright\bfseries}p{0.2\textwidth} p{0.7\textwidth} }
+    IQ-B0 (Fünf) &
+    Welcher der Schritte, die Sie bei der Konfiguration Ihrer Umgebung (IQ-A2) durchlaufen, ist Ihrer Meinung nach der wichtigste für den Erfolg eines Projekts? \newline
+    [Schritte aus IQ-A2] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Vorhandensein einer eindeutigen Config \mbox{\textbf{\{1: IP-0\}}}
+            \item Existenz eins einzigen Commands zum Starten der Infrastruktur \mbox{\textbf{\{1: IP-0\}}}
+            \item Aufsetzen der Entwicklungsumgebung \mbox{\textbf{\{1: IP-1\}}}
+            \item Evolution eines eigenen Artefakts auf die nächste Stage \mbox{\textbf{\{1: IP-2\}}}
+            \item Einrichtung eines einfachen und verständlichen Setups \mbox{\textbf{\{1: IP-3\}}}
+            \item Vermeidung unnötiger Komplexität von Beginn an \mbox{\textbf{\{1: IP-3\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-B1 (Vier) &
+    Wie viele Zeitressourcen benötigen Sie typischerweise für das Onboarding neuer Entwickler im Hinblick auf Ihre Toolchains? \newline
+    [Ressourcen in h] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item $ < 01 h $ in neuem Projekt \mbox{\textbf{\{1: IP-0\}}}
+            \item $ \sim 08 h $ (1 Tag) in neuem Projekt \mbox{\textbf{\{2: IP-1, IP-3\}}}
+            \item $ \sim 16 h - 24 h $ (2 - 3 Tage) in neuem Projekt \mbox{\textbf{\{1: IP-2\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-B2 (Fünf) &
+    Welcher der Schritte (IQ-A2), die Sie genannt haben, würde durch eine Optimierung oder Automatisierung die meisten Zeitressourcen einsparen? \newline
+    [Schritte aus IQ-A2] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Installation der Entwicklungsumgebung \mbox{\textbf{\{1: IP-3\}}}
+            \item Installation von SDKs \mbox{\textbf{\{1: IP-1\}}}
+            \item Installation von Dependencies \mbox{\textbf{\{2: IP-0, IP-3\}}}
+            \item Einrichtung des Projekts lokal mit erster Ausführung \mbox{\textbf{\{1: IP-2\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-B3 (Vier) &
+    Gibt es manuelle Schritte in Ihrer Development- oder Deploymentumgebung, deren Automatisierung nicht möglich oder nicht sinnvoll ist beziehungsweise die eine Automatisierung ab einem bestimmten Punkt blockieren? \newline
+    Falls ja, welche? \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item Hinzufügen von Umgebungsvariablen aus der Config \mbox{\textbf{\{1: IP-2\}}}
+            \item Auswahl von Tests beim Starten der Software \mbox{\textbf{\{1: IP-0\}}}
+            \item Bestätigung beim Deployment auf \linebreak[1] Produktivumgebungen oder Stages \mbox{\textbf{\{3: IP-0, IP-1, IP-3\}}}
+        \end{itemize}
+    } \\
+    \hline
+    IQ-B4 (Fünf) &
+    Welche drei Ziele würden Sie verfolgen, wenn Sie eine Toolchain für ein neues Projekt im eingangs beschriebenen Projektkontext entwerfen müssten? \newline
+    [Liste aus Zielen] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        \begin{itemize}
+            \item \mbox{\textbf{\{1: IP-0\}}}
+            \begin{enumerate}
+                \item Containerisierung \mbox{\textbf{\{1: IP-0\}}}
+                \item 12-Faktor-Prinzipien \mbox{\textbf{\{1: IP-0\}}}
+                \item Verwendung einer Sprache mit Typprüfung und minimalen externen Abhängigkeiten \mbox{\textbf{\{1: IP-0\}}}
+            \end{enumerate}
+            \item \mbox{\textbf{\{1: IP-1\}}}
+            \begin{enumerate}
+                \item Reduzierung von manuellem Aufwand \mbox{\textbf{\{1: IP-1\}}}
+                \item Senkung der Einstiegskurve \mbox{\textbf{\{1: IP-1\}}}
+                \item Einräumen von Freiheiten für neue Entwickler \mbox{\textbf{\{1: IP-1\}}}
+            \end{enumerate}
+            \item \mbox{\textbf{\{1: IP-2\}}}
+            \begin{enumerate}
+                \item Reduzierung des Arbeitsaufwands \mbox{\textbf{\{1: IP-2\}}}
+                \item starke Anpassbarkeit \mbox{\textbf{\{1: IP-2\}}}
+                \item Toolchain entspricht einem (Unternehmens-)Standard \mbox{\textbf{\{1: IP-2\}}}
+            \end{enumerate}
+            \item \mbox{\textbf{\{1: IP-3\}}}
+            \begin{enumerate}
+                \item Einfachheit \mbox{\textbf{\{1: IP-3\}}}
+                \item Unterstützung von Fast Feedback \mbox{\textbf{\{1: IP-3\}}}
+                \item Stabilität \mbox{\textbf{\{1: IP-3\}}}
+            \end{enumerate}
+        \end{itemize}
+    } \\
+\end{longtable}
+
+\clearpage
+
+\subsection{Geschlossene Fragen}
+\label{subsec:AA-03-03_closed-questions}
+
+\begin{longtable}{ >{\raggedright\bfseries}p{0.2\textwidth} p{0.7\textwidth} }
+    IQ-C0 (Eins) &
+    Wie groß ist Ihrer Meinung nach der Anteil an manuellen Schritten (IQ-B3), deren Automatisierung nicht möglich oder nicht sinnvoll ist? \newline
+    [Wert zwischen 0 \% und 100 \%] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        10 \% bis 20 \% \mbox{\textbf{\{3: IP-0, IP-1, IP-2\}}} \\
+        05 \% \mbox{\textbf{\{1: IP-3\}}}
+    } \\
+    \hline
+    IQ-C1 (Eins) &
+    Was denken Sie, wie gut könnten einzelne Komponenten Ihrer Toolchains (wie beispielsweise ein Paketmanager oder ein Pipeline-Tool) ausgetauscht werden, also wie flexibel sind die Toolchains? \newline
+    [Skala von 1 (sehr wenig austauschbar) bis 5 (sehr flexibel)] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        2 \mbox{\textbf{\{1: IP-2\}}} \\
+        3 \mbox{\textbf{\{1: IP-1\}}} \\
+        4 bis 5 \mbox{\textbf{\{2: IP-0, IP-3\}}}
+    } \\
+    \hline
+    IQ-C2 (Drei) &
+    Wie häufig müssen Sie Anpassungen an Ihrer Development- oder Deploymentumgebung vornehmen, um neuen Projektanforderungen gerecht zu werden? \newline
+    [Skala von 1 (sehr selten) bis 5 (sehr häufig)] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        2 bis 3 \mbox{\textbf{\{4: IP-0, IP-1, IP-2, IP-3\}}}
+    } \\
+    \hline
+    IQ-C3 (Drei) &
+    Wie regelmäßig aktualisieren Sie die verwendeten Tools und Bibliotheken in Ihrer Umgebung? \newline
+    [Skala von 1 (selten oder nie) bis 5 (sehr regelmäßig)] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        1 bis 2 \mbox{\textbf{\{1: IP-0\}}} \\
+        3 \mbox{\textbf{\{1: IP-2\}}} \\
+        4 \mbox{\textbf{\{1: IP-3\}}} \\
+        5 \mbox{\textbf{\{1: IP-1\}}}
+    } \\
+    \hline
+    IQ-C4 (Vier) &
+    An welcher Stelle wird Ihre Software in der Regel nach Anpassungen das erste Mal ausgeführt? \newline
+    [Auswahl zwischen \q{lokal}, \q{Pipeline} und \q{X-Stage}] \\
+    \nopagebreak
+    \multicolumn{2}{ >{\raggedright}p{0.9\textwidth} }{
+        lokal \mbox{\textbf{\{4: IP-0, IP-1, IP-2, IP-3\}}}
+    } \\
+\end{longtable}
+
+\clearpage
+
+\subsection{Bewertungsmöglichkeit für Anforderungen}
+\label{subsec:AA-03-04_evaluation-requirements}
+
+\setcounter{factornoappendix}{-1}
+\begin{longtable}{  |   >{\raggedleft\factornumberappendix}p{0.025\textwidth}   % Number (centered)
+                        >{\raggedright\bfseries}p{0.175\textwidth}              % Factor (left-aligned)
+                    |   >{\raggedright}p{0.600\textwidth}                       % Requirements and linking Concepts (left-aligned)
+                    |   >{}p{0.100\textwidth}                                   % Points (centered)
+                    | }
+    \hline
+        & \upshape\textbf{Faktor} 
+        & \upshape\textbf{Anforderungen und verknüpfte Konzepte}
+        & \upshape\textbf{Punkte} \\
+    \hline \hline
+    \endhead
+    \hline
+    %   (I) Codebase
+        & Codebase
+        & \textit{GitOps} \textrightarrow Repository als \q{Single Source of Truth}
+        & 04 \\
+    \hline
+    %   (II) Dependencies
+        & Dependencies
+        & \textit{GitOps} \textrightarrow Dependencies deklarativ in Konfigurationsdateien
+        & 04 \\
+    \hline
+    %   (III) Config
+        & Config
+        & \textit{Dotfiles} \textrightarrow Konfiguration in \texttt{.env} files außerhalb des Repositories
+        & 03 \\
+    \hline
+    %   (IV) Backing Services
+        & Backing Services
+        & \textit{Dotfiles} \textrightarrow Zugang zu Diensten über Config
+        & 02 \\
+    \hline
+    %   (V) Build, Release, Run
+        & Build, Release, Run
+        & \textit{DevOps} \textrightarrow CI/CD Pipelines, \newline
+          \textit{Dotfiles} \textrightarrow Config in Release Stage
+        & 04 \\
+    \hline
+    %   (VI) Processes
+        & Processes
+        & -/-
+        & 00 \\
+    \hline
+    %   (VII) Port Binding
+        & Port Binding
+        & \textit{GitOps} \textrightarrow Dependency Declaration für eingebundene Webserver, \newline
+          \textit{Dotfiles} \textrightarrow Konfiguration von Ports
+        & 00 \\
+    \hline
+    %   (VIII) Concurrency
+        & Concurrency
+        & -/-
+        & 01 \\
+    \hline
+    %   (IX) Disposability
+        & Disposability
+        & \textit{Best Containerization Practices} \textrightarrow kompakte Gestaltung von Docker Images
+        & 00 \\
+    \hline
+    %   (X) Dev / Prod Parity
+        & Dev / Prod Parity
+        & Toolchain-as-Code Strategie
+        & 04 \\
+    \hline
+    %   (XI) Logs
+        & Logs
+        & \textit{Best Containerization Practices} \textrightarrow Prozesse loggen nach \texttt{stdout}
+        & 02 \\
+    \hline
+    %   (XII) Admin Processes
+        & Admin Processes
+        & -/-
+        & 00 \\
+    \hline
+\end{longtable}
+\vspace{1em}
+\setcounter{factornoappendix}{0}
