@@ -4,8 +4,11 @@
 \subsection{Ziel}
 \label{subsec:04-01-01_goal}
 
-% place content here
-Inhalt
+Während der \nameref{ch:03_examination-of-existing-approaches} in \autoref{ch:03_examination-of-existing-approaches} konnten einige Ansätze identifiziert werden, die bei der Erfüllung der in \autoref{ch:01_introduction-and-motivation} angenommenen Anforderungen unterstützen können. Vor der Entwicklung einer konkreten Strategie müssen die Anforderungen an eine \nameref{ch:05_toolchain-as-code} Strategie jedoch noch konkreter und sicherer ermittelt werden. Einen ersten Vorschlag liefert die \hyperref[sec:03-05_basic-idea-of-twelve-factor-app]{Twelve-Factor-App}. Weitere und praxisnahe Anforderungen an Toolchains in den Bereichen \Gls{development} und \Gls{deployment} sollen Experten und Praktiker liefern.
+
+Herausgefunden werden sollen eine ideale Zusammensetzung von Development- und Deploymentumgebungen, übliche Vorgehensweisen und Interaktionswege sowie typische Herausforderungen im Umgang mit aktuellen Development- und Deploymentumgebungen. Wichtig ist außerdem die Erhebung eines Ist-Stands bei Automatisierungsgrad und \Gls{developer-experience} im \Gls{development} und im \Gls{deployment}. Zusätzlich sollen die Anforderungen und Ziele für Development- und Deploymentumgebungen priorisiert werden. Das zentrale Ziel dieses Kapitels ist die Beantwortung der \acrlong{rq} \textbf{RQ-0} (siehe \autoref{sec:01-03_objectives-and-research-questions}).
+
+Die Ergebnisse der vorausgegangenen Literaturrecherche sollen in die Untersuchungen einbezogen werden. Die hier ermittelten Anforderungen wiederum werden als Grundlage für die Entwicklung der \nameref{sec:05-02_strategy-for-toolchains} dienen.
 
 \subsection{Methodik}
 \label{subsec:04-01-02_methodology}
@@ -13,29 +16,195 @@ Inhalt
 \subsubsection{Vorgehen}
 \label{subsubsec:04-01-02-01_procedure}
 
-% place content here
-Inhalt
+Als geeignete Methodik zur Erhebung der Anforderungen wurde das Experteninterview gewählt. Die Vorteile dieser Methodik sind die relativ schnelle Gewinnung von Daten, die Abkürzung eines sonst aufwändigen Beobachtungsprozesses sowie eine tendenziell große Bereitschaft zur Teilnahme, da sich die Befragten meist im gleichen wissenschaftlichen Feld bewegen \cite{401:Das-Experteninterview}. Ein Experte im Verständnis dieser Arbeit kann dabei \acrshort{iAa} \citeauthor{401:Das-Experteninterview} verstanden werden als jemand, der über besondere Informationen oder Fähigkeiten in einem bestimmten Bereich verfügt, einen spezifischen Wissensvorsprung in einem Feld aufweist oder bei wem sich vermuten lässt, dass er bestimmtes Expertenwissen und damit Relevanz für einen Forschungsgegenstand hat \cite{401:Das-Experteninterview}. Die konstruktivistische Definition legt nahe, dass Experten innerhalb von Organisationen auch und besonders auf niedrigen Hierarchieebenen zu finden sind \cite{401:Das-Experteninterview}.
+
+Grundsätzlich können drei verschiedene Arten des Experteninterviews unterschieden werden. Ein \textbf{exploratives Experteninterview} dient der Herstellung einer ersten Orientierung, der Schärfung des Problembewusstseins auf Seite des Forschenden oder als Vorlauf zur Erstellung eines finalen Interviewleitfadens. Es wird möglichst offen geführt und sein Leitfaden deckt nur die zentralsten Dimensionen des Forschungsgebiets ab. Das \textbf{systematische Experteninterview} fokussiert sich auf die Ermittlung von aus der Praxis gewonnenem Wissen, welches spontan durch Experten wiedergegeben werden kann. Der Experte hat hier die Funktion eines Ratgebers und der Leitfaden ist relativ ausdifferenziert. Besonders wichtig ist bei dieser Form des Experteninterviews die thematische Vergleichbarkeit. Dahingegen ist es Ziel des \textbf{theoriegenerierenden Experteninterviews}, das Expertenwissen in einer größeren Tiefe zu erschließen. \cite{401:Das-Experteninterview}
+
+Für den vorliegenden Anwendungsfall ist diese letzte Variante des Experteninterviews eher unpassend. Eine erste Orientierung wurde bereits durch die Literaturrecherche bei der \nameref{ch:03_examination-of-existing-approaches} in \autoref{ch:03_examination-of-existing-approaches} gewonnen, weshalb auch ein exploratives Experteninterview für das Stadium der Forschungen nicht geeignet ist. Die Wahl fällt somit auf ein systematisierendes Experteninterview, wobei ein Leitfaden die Vergleichbarkeit der erhobenen Daten gewährleisten und zugleich offen genug sein soll, um zusätzliche Impulse zuzulassen.
 
 \subsubsection{Form}
 \label{subsubsec:04-01-02-02_form}
 
-% place content here
-Inhalt
+Spezifische und theoriegeleitete Vorannahmen zum Forschungsfeld bestehen bereits (\acrshort{vgl} \autoref{ch:03_examination-of-existing-approaches}). Die Wahl fällt, wie im vorherigen Abschnitt angerissen, auf ein \textbf{leitfadengestütztes Interview}.
+
+Diese Form des Interviews ist teilstandardisiert. Konkrete Fragen werden vorab ausgearbeitet, die Orientierung erfolgt jedoch auch entlang der Aussagen des Experten. Die Fragen selbst werden dabei so angeordnet, dass sich das Interview vom Allgemeinen zum Spezifischen bewegt. \cite{205:Leitfadengestuetztes-Interview} Der Leitfaden soll eine Orientierung für den Forschenden bieten, aber \qit{nicht als zwingendes Ablaufmodell des Diskurses} \cite{401:Das-Experteninterview} angesehen werden. Ein Risiko des Leitfadens kann sein, wenn \qit{ein Experte sich in einem anderen Sprachspiel als dem des Leitfadens bewegt} \cite{401:Das-Experteninterview}. Drei wichtige Kriterien müssen durch das Interview erfüllt sein: Offenheit, Spezifität sowie Kontextualität und Relevanz. \textbf{Offenheit} fordert, dass der Interviewpartner den Sachverhalt aus seiner eigenen Sicht beschreiben können sollte. Bei Andeutungen oder ungenauen Ausführungen durch den Befragten, sollte der Forschende zu Gunsten der \textbf{Spezifität} genauer nachfragen. \textbf{Kontextualität und Relevanz} sind erfüllt, wenn die Fragen in den Kontext des Befragten passen. \cite{205:Leitfadengestuetztes-Interview}
+
+Der zu entwickelnde Leitfaden soll genau dieser Methodik folgen. Dabei werden vor der Erstellung der \Glspl{iq} zunächst vier Fragenbereiche (von \texttt{A} bis \texttt{D}) festgelegt:
+
+\begin{itemize}
+    \item \texttt{(A)} \textbf{Offene Fragen} sollen den Ergebnisraum zunächst aus Sicht des Befragten beleuchten.
+    \item \texttt{(B)} \textbf{Halb-offene Fragen} geben bereits einen gewissen Antwortraum vor und greifen auf Antworten aus \texttt{(A)} zurück.
+    \item \texttt{(C)} \textbf{Geschlossene Fragen} sind besonders vergleichbar, ihre Antworten oft kurz und numerisch, meistens auf einer Skala oder mit einer vorgegebenen Einheit.
+    \item \texttt{(D)} Bereits vorgegebene Konzepte sollen ganz zum Schluss beleuchtet werden, wobei deren \textbf{Bewertung durch den Befragten} durch die \textbf{Vergabe von Punkten} erfolgen soll.
+\end{itemize}
+
+In der Einführung soll dem Befragten zunächst Kontext zum Projekt gegeben werden, insbesondere zur Problematik des Development-Deployment-Gaps sowie zu den Zielen der Arbeit, beides entsprechend beschrieben in \autoref{ch:01_introduction-and-motivation}. Die Begriffe Development- und Deploymentumgebung genauso wie die Interpretation von \Gls{development} und \Gls{deployment} selbst sollen ebenfalls klargestellt werden. Anschließend wird der Kontext der Arbeit dargestellt, bestehend aus \nameref{sec:02-01_web-development}, \nameref{sec:02-02_microservices} und \nameref{sec:02-03_containerization}. Das \nameref{subsec:04-01-01_goal} des Interviews soll ebenfalls deutlich gemacht werden. Dieses ist die Ermittlung des üblichen Vorgehens im jeweiligen Bereich (\Gls{development} beziehungsweise \Gls{deployment}) sowie von Hindernissen, Wünschen oder eigene Best Practices der Befragten. Zum Abschluss soll dem Befragten Einsicht in das stichpunktförmige Protokoll gegeben werden, um eine sofortige Feedbackschleife und eine Rückversicherung zum korrekten Verständnis des Gesagten zu haben. Außerdem soll freiwillig Feedback zum Vorgehen und zum Interview selbst gegeben werden können.
+
+Ein Interview soll insgesamt zwischen 45 und 60 Minuten dauern.
 
 \subsubsection{Auswahl der Experten}
 \label{subsubsec:04-01-02-03_selection-of-experts}
 
-% place content here
-Inhalt
+Die Auswahl von Experten stellt das Hauptproblem der Methodik dar. Sachkenntnis, Motivation und Einfluss zur praktischen Umsetzung von Ergebnissen können mögliche Faktoren sein. \cite{401:Das-Experteninterview} Sachkenntnis und praktische Erfahrung haben dabei die größte Relevanz für das \nameref{subsec:04-01-01_goal} der Interviews im Rahmen dieser Arbeit. Anforderungen an die Experten sind daher eine Tätigkeit im Projektumfeld, eine einschlägige akademische Ausbildung im Bereich Software Engineering oder \Gls{it} allgemein sowie mindestens zwei Jahre aktive Berufserfahrung. Nicht zu vernachlässigen ist die sogenannte \q{Stakeholder-Problematik}, die auftritt, wenn Interviewpartner in Maßnahmen des Forschungskontexts involviert sind \cite{401:Das-Experteninterview}. Der \nameref{sec:01-02_project-context} liegt im \Gls{am} eines großen Automobilherstellers, weshalb nur eine Hälfte der Interviewpartner aus diesem Bereich stammen soll. Die andere Hälfte soll im \Gls{sdc} des gleichen Unternehmens tätig sein. Das gewährleistet eine gewisse Diversität und beleuchtet auch die Vorgehensweisen eines anderen Bereichs. Auch wichtig ist die Berücksichtigung aller Akteursebenen \cite{401:Das-Experteninterview}, weshalb sowohl Experten aus dem Bereich \Gls{development} als auch aus dem Bereich \Gls{deployment} gesucht werden. Die Experten dürfen selbst einschätzen, welchem Bereich sie eher entsprechen und Mehrfachzuordnungen sind ebenfalls möglich. Dadurch ist gewährleistet, dass eine Grundkompetenz in allen Forschungsgegenständen vorliegt und dass bei der Auswertung der \nameref{subsec:04-01-04_interview-results} zu jedem Bereich Anforderungen ableitbar sind.
+
+Für diese Experteninterviews, ist die Ermittlung quantitativer Ergebnisse nur ein sekundäres Ziel. In erster Linie stehen qualitative Aspekte im Vordergrund. Das Expertenwissen soll Aufschluss darüber geben, welche Fokuspunkte bei den Anforderungen an Development- und Deploymentumgebungen gesetzt werden. Deshalb ist eine kleine Stichprobe an Experten ausreichend.
+
+Insgesamt befragt wurden vier Personen, davon alle mit abgeschlossenem Universitäts- oder Hochschulstudium der Informatik, zwei aus dem \Gls{am} und zwei aus dem \Gls{sdc}. Alle Befragten gaben an, aktuell im Bereich \Gls{development} tätig zu sein, 75 \% seien im \Gls{deployment} tätig und 25 \% sogar im Bereich Operations. Die \Glspl{ip} waren ausnahmslos männlichen Geschlechts, ihr Alter lag zwischen 26 Jahren und 51 Jahren, sowohl im Median als auch im Mittel waren sie 38 Jahre alt.
 
 \subsection{Interviewfragen}
 \label{subsec:04-01-03_interview-questions}
 
-% place content here
-Inhalt
+Eine vollständige Liste mit allen \Glspl{iq} ist im \autoref{ch:AA_expert-interviews} unter den \nameref{sec:AA-01_interview-questions} einsehbar.
+
+Jede \acrfull{iq} soll einem bestimmten Zielbereich zugeordnet werden. Zielbereiche wiederum leiten sich aus dem eingangs beschriebenen \nameref{subsec:04-01-01_goal} (vgl. \autoref{subsec:04-01-01_goal}) ab. Erhoben werden sollen, abhängig vom Zielbereich
+
+\begin{itemize}
+    \item \texttt{(Eins)} die \textbf{Zusammensetzung} von (4 Fragen),
+    \item \texttt{(Zwei)} \textbf{Vorgehensweisen} und \textbf{Interaktionswege} mit (1 Frage),
+    \item \texttt{(Drei)} \textbf{Herausforderungen} im Umgang mit (3 Fragen),
+    \item \texttt{(Vier)} ein \textbf{Ist-Stand} für Automatisierung und \Gls{developer-experience} in (3 Fragen), sowie
+    \item \texttt{(Fünf)} Prioritäten bei \textbf{Anforderungen} an und \textbf{Zielen} für (4 Fragen)
+\end{itemize}
+
+Development- und Deploymentumgebungen (nachfolgend \q{Umgebungen} genannt).
+
+\textbf{\nameref{subsec:AA-01-01_open-questions}} (\texttt{\hyperref[subsubsec:04-01-02-02_form]{(A)}} \textrightarrow \texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-Ax}}) zielen auf die Bereiche \texttt{(Eins)}, \texttt{(Zwei)} und \texttt{(Drei)} ab. Sie möchten explorativ und unvoreingenommen erste Erfahrungen des Experten beleuchten und sollen eine Vorstellung vom praktischen Umfeld erschaffen. Dazu erfragen sie die Idealvorstellung von Umgebungen (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-A0}}), die verwendeten Tools (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-A3}}), häufige Handgriffe (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-A2}}), auftretende Hindernisse (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-A1}}) und besondere Anforderungen an Umgebungen (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-A4}}).
+
+\textbf{\nameref{subsec:AA-01-02_half-open-questions}} (\texttt{\hyperref[subsubsec:04-01-02-02_form]{(B)}} \textrightarrow \texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-Bx}}) beleuchten die Bereiche \texttt{(Vier)} und \texttt{(Fünf)}. Sie sollen das aktuelle Vorgehen bewertbar machen und rückbeziehen sich teilweise auf offene Fragen (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-Ax}}), um den Befragten bereits gegebene Antworten nochmal genauer reflektieren zu lassen. Dazu erfragen sie den momentanen Zeitbedarf für das Aufsetzen einer Umgebung (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-B0}}), die wichtigsten Schritte (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-B0}}) dabei, die unter ihnen, deren Optimierung den größten Mehrwert bringen würde (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-B2}}) und diejenigen, die explizit nicht automatisierbar (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-B3}}) sind. Zusätzlich sollen durch den Befragten drei gewichtete Ziele (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-B4}}) genannt werden, die er bei der Entwicklung einer eigenen neuen Toolchain verfolgen würde.
+
+\textbf{\nameref{subsec:AA-01-03_closed-questions}} (\texttt{\hyperref[subsubsec:04-01-02-02_form]{(C)}} \textrightarrow \texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-Cx}}) konzentrieren sich auf die Bereiche \texttt{(Eins)}, \texttt{(Drei)} und \texttt{(Vier)}. Sie sind eher quantitativ und sollen eine untergeordnete Rolle bei der Auswertung spielen, aber zur Entwicklung eines ungefähren numerischen Feldes des Ist-Stands beitragen. Dazu erfragen sie den prozentualen Anteil nicht automatisierbarer Schritte (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C0}}), die Flexibilität (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C1}}) und den Bedarf an Flexibilität (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C1}}, \texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C2}}, \texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C3}}) von Toolchains sowie die Mindestanforderungen an Umgebungen (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C4}}).
+
+Der letzte Abschnitt des Interviews gibt dem Befragten eine \textbf{\nameref{subsec:AA-01-04_evaluation-requirements}} (\texttt{\hyperref[subsubsec:04-01-02-02_form]{(D)}} \textrightarrow \texttt{\hyperref[subsec:AA-01-04_evaluation-requirements]{IQ-Dx}}) vor, die in Form von Faktoren der \hyperref[sec:03-05_basic-idea-of-twelve-factor-app]{Twelve-Factor-App} genannt werden. Dieses Vorgehen soll dabei helfen, einzelne Elemente der geplanten \nameref{ch:05_toolchain-as-code} Strategie zu priorisieren und den richtigen Fokus für den größten Mehrwert zu setzen. Bewertet werden die Faktoren über die Vergabe von insgesamt sechs Punkten pro Befragtem, deren Verteilung frei entschieden werden kann. In \autoref{subsec:AA-01-04_evaluation-requirements} sind die genauen Faktoren und ihre Zuordnung zu Anforderungen aus \hyperref[ch:03_examination-of-existing-approaches]{bestehenden Ansätzen} aufgeführt.
 
 \subsection{Interviewergebnisse}
 \label{subsec:04-01-04_interview-results}
 
-% place content here
-Inhalt
+Die Ergebnisse der Experteninterviews sind im \autoref{ch:AA_expert-interviews} unter \nameref{sec:AA-03_interview-results} einsehbar.
+
+Am Ende jeden Interviews gab es die Möglichkeit, freiwillig eine außerfachliche Rückmeldung zur Methodik und zum Interview selbst zu geben. Zwei Personen (\textbf{\hyperref[sec:AA-02_interview-persons]{IP-2}}, \textbf{\hyperref[sec:AA-02_interview-persons]{IP-3}}) haben diese Möglichkeit genutzt. Ergebnis war unter anderem, dass die Einleitung noch mehr Details zum Hintergrund der Arbeit hätte enthalten können und dass die Definitionen von Development- und Deploymentumgebungen noch deutlicher hätten hervorgehoben werden können. Sehr positiv wurde die Aufbereitung der \Glspl{iq} wahrgenommen, auch ihre Anordnung sei sehr angenehm gewesen. Ein Experte fand sich besonders gut eingebunden, weil einzelne Fragen aufeinander aufbauten und so ein Gesprächsfluss entstand.
+
+Insbesondere die \textbf{\hyperref[subsec:AA-01-01_open-questions]{offenen Fragen}} (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-Ax}}) wurden sehr häufig genutzt, um zusätzliches Expertenwissen zu teilen, welches nicht unbedingt innerhalb des erwarteten Antwortraums lag. Die \textbf{\hyperref[subsec:AA-01-02_half-open-questions]{halb-offenen Fragen}} (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-Bx}}) konnten sehr gut zur Sortierung und Bewertung der Ergebnisse beitragen. Generell lieferten die nicht-geschlossenen Fragen (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-Ax}}, \texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-Bx}}) gute und ausführliche Ergebnisse. Die \textbf{\hyperref[subsec:AA-01-03_closed-questions]{geschlossenen Fragen}} (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-Cx}}) waren etwas weniger ertragreich. Vielen \acrlong{ip} fiel es schwer, sich auf einen quantitativen Wert festzulegen. Zwar lassen sich in den Ergebnissen die grundlegenden Positionen auf einem Antwortspektrum ablesen, dennoch sind einige Ergebnisse zu gestreut, um für weitere Forschungen verwendbar zu sein.
+
+Auffällig ist, dass die Experten zwar alle relevanten Bereiche (\Gls{development} und \Gls{deployment}) durch ihre Antworten abdecken, viele von ihnen sich allerdings eher dem \Gls{development} zuordnen lassen, was auf ein generell größeres Potential in diesem Bereich schließen lässt (siehe Abbildung 4.6 (t. b. d.)). Das \Gls{development} wurde fast immer zuerst, oft auch ausschließlich angesprochen, sofern immanente Fragen unberücksichtigt bleiben. Alle genannten Optionen zur Einsparung von Zeitressourcen (\texttt{\hyperref[subsec:AA-03-02_half-open-questions]{IQ-B2}}) liegen in diesem Bereich, ebenso treten die meisten Herausforderungen (\texttt{\hyperref[subsec:AA-03-01_open-questions]{IQ-A0}}) fast ausschließlich dort auf.
+
+\setcounter{factorno}{-1}
+\begin{longtable}{  |   >{\raggedleft\bfseries}p{0.0125\textwidth}              % Position (centered)
+                    |   >{\raggedright\bfseries\small}p{0.2250\textwidth}       % Number, Factor (left-aligned)
+                    |   >{\raggedright\itshape\small}p{0.6375\textwidth}        % Description (left-aligned)
+                    |   >{}p{0.0250\textwidth}                                  % Points (centered)
+                    | }
+    \hline
+          \upshape\normalsize
+        & \upshape\normalsize\textbf{Faktor} 
+        & \upshape\normalsize\textbf{Beschreibung} \cite{101:The-Twelve-Factor-App}
+        & \upshape\normalsize\textbf{\acrshort{p}} \\
+    \hline \hline
+    \endhead
+    \hline
+    %   (I) Codebase
+          0
+        & %\setcounter{factorno}{01}\Roman{factorno}
+          Codebase
+        & One codebase tracked in revision control, with multiple deploys.
+        & 04 \\
+    \hline
+    %   (II) Dependencies
+          0
+        & %\setcounter{factorno}{02}\Roman{factorno}
+          Dependencies
+        & Dependencies must be explicitly declared and isolated.
+        & 04 \\
+    \hline
+    %   (V) Build, Release, Run
+          0
+        & %\setcounter{factorno}{05}\Roman{factorno}
+          Build, Release, Run
+        & Strictly separate build, release, and run stages.
+        & 04 \\
+    \hline
+    %   (X) Dev / Prod Parity
+          0
+        & %\setcounter{factorno}{10}\Roman{factorno}
+          Dev / Prod Parity
+        & Keep development, staging, and production as similar as possible.
+        & 04 \\
+    \hline
+    %   (III) Config
+          1
+        & %\setcounter{factorno}{03}\Roman{factorno}
+          Config
+        & Store configuration in the environment, not in the code.
+        & 03 \\
+    \hline
+    %   (IV) Backing Services
+          2
+        & %\setcounter{factorno}{04}\Roman{factorno}
+          Backing Services
+        & Treat backing services (e.g., databases) as attached resources.
+        & 02 \\
+    \hline
+    %   (XI) Logs
+          2
+        & %\setcounter{factorno}{11}\Roman{factorno}
+          Logs
+        & Treat logs as event streams.
+        & 02 \\
+    \hline
+    %   (VIII) Concurrency
+          3
+        & %\setcounter{factorno}{08}\Roman{factorno}
+          Concurrency
+        & Scale out via the process model.
+        & 01 \\
+    \hline
+    %   (VI) Processes
+          -
+        & %\setcounter{factorno}{06}\Roman{factorno}
+          Processes
+        & Execute the app as one or more stateless processes.
+        & 00 \\
+    \hline
+    %   (VII) Port Binding
+          -
+        & %\setcounter{factorno}{07}\Roman{factorno}
+          Port Binding
+        & Export services via port binding.
+        & 00 \\
+    \hline
+    %   (IX) Disposability
+          -
+        & %\setcounter{factorno}{09}\Roman{factorno}
+          Disposability
+        & Maximize robustness with fast startup and graceful shutdown.
+        & 00 \\
+    \hline
+    %   (XII) Admin Processes
+          -
+        & %\setcounter{factorno}{12}\Roman{factorno}
+          Admin Processes
+        & Run admin or management tasks as one-off processes.
+        & 00 \\
+    \hline
+    \caption{Interviewergebnisse zur Priorisierung der Faktoren der \q{Twelve-Factor-App}}
+    \label{tab:interview-results-factors-priorities}
+\end{longtable}
+\vspace{1em}
+\setcounter{factorno}{0}
+
+Bei der Priorisierung von Faktoren der \hyperref[sec:03-05_basic-idea-of-twelve-factor-app]{Twelve-Factor-App} zur indirekten Bewertung von Anforderungen an Toolchains wurden insgesamt 24 \Glspl{p} vergeben. Trotz einer geringen Stichprobe ist eine klare Priorisierung erkennbar (siehe \autoref{tab:interview-results-factors-priorities} und \autoref{fig:g-10_interview-results-factors-priorities-total}).
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{g-10_interview-results-factors-priorities-total.png}
+    \caption{Interviewergebnisse zur Ausprägung der Faktoren in Gesamtansicht}
+    \label{fig:g-10_interview-results-factors-priorities-total}
+\end{figure}
+
+Etwa ein Drittel der Faktoren, nämlich \textbf{Codebase}, \textbf{Dependencies}, \textbf{Build, Release, Run} und \textbf{Dev / Prod Parity}, wurden von allen Befragten als gleichermaßen relevant eingestuft. Mit jeweils vier Punkten sind dies die wichtigsten Faktoren laut Expertenmeinung. Das untere Drittel erhielt insgesamt keinen einzigen der 24 vergebenen Punkte, was den Schluss zulässt, dass \textbf{Processes}, \textbf{Port Binding}, \textbf{Disposability} und \textbf{Admin Processes} mit Fokus auf Toolchains die vernachlässigbaren Faktoren sind. Die restlichen Faktoren, \textbf{Config}, \textbf{Backing Services}, \textbf{Logs} und \textbf{Concurrency}, befinden sich im mittleren Drittel und erhielten etwa 33 \% der Punkte. Die genaue Verteilung der Punkte auf die Faktoren kann \autoref{fig:g-09_interview-results-factors-priorities-per-persons} entnommen werden.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{g-09_interview-results-factors-priorities-per-persons.png}
+    \caption{Interviewergebnisse zur Priorisierung der Faktoren nach Interviewpersonen}
+    \label{fig:g-09_interview-results-factors-priorities-per-persons}
+\end{figure}
