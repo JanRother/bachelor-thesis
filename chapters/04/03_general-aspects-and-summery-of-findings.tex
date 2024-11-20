@@ -1,5 +1,58 @@
 \section{Allgemeines und Zusammenfassung der Erkenntnisse}
 \label{sec:04-03_general-aspects-and-summery-of-findings}
 
-% place content here
-Inhalt
+Die Anforderungen \nameref{sec:04-02_derivation-of-requirements} erfolgte hauptsächlich über die Ergebnisse nicht-geschlossener Fragen (\texttt{\hyperref[subsec:AA-01-01_open-questions]{IQ-Ax}}, \texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-Bx}}). Die Ergebnisse der geschlossenen Fragen (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{CQ-x}}) eignen sich hingegen dazu, einen quantitativen Ist-Stand abzubilden. Schlüsselerkenntnisse sind unter anderem, dass der Anteil nicht automatisierbarer Schritte (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C0}}) zwischen fünf und zwanzig Prozent liegt (\acrshort{vgl} \autoref{subsec:AA-03-03_closed-questions}) und dass die Flexibilität der Toolchains (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C1}}) je nach Abteilung der \Gls{ip} unterschiedlich ausfallen kann. So gaben \Glspl{ip} aus dem \Gls{am} an, eher weniger austauschbare Toolchains zu haben, wohingegen \Glspl{ip} aus dem \Gls{sdc} dort eher flexibler sind (\acrshort{vgl} \autoref{subsec:AA-03-03_closed-questions}). Anpassungen an der Umgebung eines Softwareprojekts (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C2}}) sind in der Regel wenig bis selten notwendig (\acrshort{vgl} \autoref{subsec:AA-03-03_closed-questions}) und der Tausch von Tools oder Bibliotheken (\texttt{\hyperref[subsec:AA-01-03_closed-questions]{IQ-C3}}) findet unterschiedlich häufig statt (\acrshort{vgl} \autoref{subsec:AA-03-03_closed-questions}).
+
+Die Experteninterviews gaben deutlich Aufschluss über die wichtigsten Anforderungen in allen Bereichen, für das \Gls{development} (\texttt{DEV}), das \Gls{deployment} (\texttt{DEP}) und die Durchgängigkeit (\texttt{CNT}). Die Ergebnisse lassen außerdem eine klare Priorisierung der Anforderungen zu.
+
+Im Folgenden werden die in \autoref{sec:04-02_derivation-of-requirements} ermittelten Anforderungen, unterschieden nach ihrem Bereich und sortiert nach ihrer Priorität, in klare Aussagen zusammengefasst.
+
+\begin{table}[H]
+    \begin{tabular}{ >{\bfseries\ttfamily}p{0.1\textwidth} >{}p{0.8\textwidth} }
+        DEV-0   &   Eine Entwicklungsumgebung wird schnell und vollständig geladen. \\
+        DEV-1   &   Die Applikation ist auf den lokalen Maschinen der Entwickler ausführbar. \\
+        DEV-2   &   Konfiguration ist im \Gls{vcs} verfügbar. \\
+        DEV-3   &   Alle nötigen Abhängigkeiten und \Glspl{sdk} \newline sind in der Umgebung bereitgestellt. \\
+        DEV-4   &   Dokumentation ist aktuell und intuitiv. \\
+        DEV-5   &   Skripte reduzieren komplexere imperative Aufgaben auf einen Befehl. \\
+    \end{tabular}
+    \caption{Anforderungen an Toolchains im Bereich Development}
+    \label{tab:requirements-development}
+\end{table}
+
+\begin{table}[H]
+    \begin{tabular}{ >{\bfseries\ttfamily}p{0.1\textwidth} >{}p{0.8\textwidth} }
+        DEP-0   &   Mit Ausnahme einer händischen Bestätigung ist \newline das Deployment vollständig automatisiert. \\
+        DEP-1   &   Konfiguration wird aus dem \Gls{vcs} bezogen. \\
+        DEP-2   &   Umgebung und Applikation sind Container. \\
+        DEP-3   &   Bei Problemen werden Entwickler sofort benachrichtigt. \\
+    \end{tabular}
+    \caption{Anforderungen an Toolchains im Bereich Deployment}
+    \label{tab:requirements-deployment}
+\end{table}
+
+\begin{table}[H]
+    \begin{tabular}{ >{\bfseries\ttfamily}p{0.1\textwidth} >{}p{0.8\textwidth} }
+        CNT-0   &   Automatisierung erfolgt auf allen Ebenen über die gleichen Tools. \\
+        CNT-1   &   Die lokale Umgebung entspricht möglichst vollständig der Produktivumgebung. \\
+        CNT-2   &   Alle Umgebungen sind mit möglichst wenig Tooleinsatz \newline durch das Entwicklungsteam anpassbar. \\
+        CNT-3   &   Die Umgebung sowie das Verhalten der Applikation in ihr \newline sind auf allen Ebenen reproduzierbar. \\
+    \end{tabular}
+    \caption{Anforderungen an Toolchains im Bereich Durchgängigkeit}
+    \label{tab:requirements-continuity}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{g-15_interview-results-requirements-total.png}
+    \caption{Verteilung des Fokus der Anforderungen an Toolchains auf die Bereiche}
+    \label{fig:g-15_interview-results-requirements-total}
+\end{figure}
+
+Nicht alle Interviewergebnisse sind jedoch einem spezifischen Bereich zuordbar. So liefern beispielsweise die definierten Ziele bei der Entwicklung von Toolchains (\texttt{\hyperref[subsec:AA-01-02_half-open-questions]{IQ-B4}}) (\acrshort{vgl} \autoref{subsec:AA-03-02_half-open-questions}) wichtige Erkenntnisse, die in allen Bereichen Relevanz haben.
+
+Als für die \Glspl{ip} eher weniger wichtig erachtete Ziele wurden die Einhaltung von Standards (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-2}}) ohne Einschränkung der Entwickler in ihren Freiheiten (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-1}}) sowie die Stabilität der Umgebungen (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-0}}, \texttt{{\hyperref[sec:AA-02_interview-persons]{IP-3}}}) genannt. Wichtiger waren hingegen die unkomplizierte Anpassbarkeit von Toolchains (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-1}}, \texttt{\hyperref[sec:AA-02_interview-persons]{IP-2}}) und die Unterstützung von Fast Feedback beim \Gls{deployment} (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-3}}). Die drei zentralsten Ziele, die in den Interviews genannt wurden, sind die Reduzierung des manuellen Aufwands (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-1}}, \texttt{\hyperref[sec:AA-02_interview-persons]{IP-2}}) und die einfache Gestaltung der Toolchains (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-3}}). Das beste Ergebnis sollte dabei über \nameref{sec:02-03_containerization} erreicht werden (\texttt{\hyperref[sec:AA-02_interview-persons]{IP-0}}).
+
+Dies verdeutlicht, dass sehr viel Potential im Bereich \Gls{development} und bei der Reduzierung manueller Aufgaben liegt. Hier können andernfalls schnell individuelle und schlecht reproduzierbare Fehler auftreten. Dieses Ergebnis wird gestützt durch die priorisierten Faktoren der \hyperref[sec:03-05_basic-idea-of-twelve-factor-app]{Twelve-Factor-App} (\acrshort{vgl} \autoref{subsec:04-01-04_interview-results}). Als besonders wichtig bewertet wurden dort eine zentrale \Gls{codebase} für alle Bereiche (\textit{Codebase}), klare und transparent dokumentierte Abhängigkeiten (\textit{Dependencies}) sowie die Trennung einzelner Schritte (\textit{Build, Release, Run}), welche sich in den verschiedenen Umgebungen möglichst wenig unterscheiden sollten (\textit{Dev / Prod Parity}).
+
+Dieses \autoref{ch:03_examination-of-existing-approaches} beantwortet die \acrlong{rq} \textbf{RQ-0} (siehe \autoref{sec:01-03_objectives-and-research-questions}).
