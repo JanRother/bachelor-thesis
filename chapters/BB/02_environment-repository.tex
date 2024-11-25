@@ -1,0 +1,265 @@
+\section{Environment Repository}
+\label{sec:BB-02_environment-repository}
+
+\begin{figure}[H]
+    \begin{tikzpicture}[
+        grow via three points={one child at (0.5,-0.7) and
+        two children at (0.5,-0.7) and (0.5,-1.4)},
+        edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+        \node [root] {Toolchain-as-Code}
+            child { node [unselected] {\hyperref[sec:BB-01_application-repository]{tac-application}}}
+            child { node [selected] {\hyperref[sec:BB-02_environment-repository]{tac-environment}}
+                child { node [folder] {.envcontainer}
+                    child { node {\hyperref[subsec:BB-02-02_envcontainer-X-app-dockerfile]{App.Dockerfile}}}
+                    child { node {\hyperref[subsec:BB-02-01_envcontainer-X-base-dockerfile]{Base.Dockerfile}}}
+                    child { node {\hyperref[subsec:BB-02-03_envcontainer-X-dev-dockerfile]{Dev.Dockerfile}}}
+                }
+                child [missing] {}
+                child [missing] {}
+                child [missing] {}
+                child { node [folder] {.github}
+                    child { node [folder] {workflows}
+                        child { node {\hyperref[subsec:BB-02-04_github-workflows-X-base-environment-build-and-push-yaml]{base-environment-build-and-push.yaml}}}
+                        child { node {\hyperref[subsec:BB-02-06_github-workflows-X-creation-environment-build-and-push-yaml]{creation-environment-build-and-push.yaml}}}
+                        child { node {\hyperref[subsec:BB-02-05_github-workflows-X-integration-environment-build-and-push-yaml]{integration-environment-build-and-push.yaml}}}
+                    }
+                }
+                child [missing] {}
+                child [missing] {}
+                child [missing] {}
+                child [missing] {}
+                child { node {.gitattributes}}
+                child { node {.gitignore}}
+                child { node {LICENSE}}
+                child { node {README.md}}
+            }
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child { node [unselected] {\hyperref[sec:BB-03_dotfiles-repository]{tac-dotfiles}}};
+    \end{tikzpicture}
+    \caption{Verzeichnisstruktur des Environment Repositories}
+    \label{fig:p-02_directory-structure-of-environment-repository}
+\end{figure}
+
+\vspace{3em}
+
+\subsection{\texttt{.envcontainer/Base.Dockerfile}}
+\label{subsec:BB-02-01_envcontainer-X-base-dockerfile}
+
+\begin{codebox}{Dockerfile}{.envcontainer/Base.Dockerfile}
+ARG DENO_VERSION=2.1.0
+
+ARG BASE_REPOSITORY=denoland
+ARG BASE_IMAGE=deno
+ARG BASE_ENVIRONMENT=debian
+ARG BASE_RELEASE=${DENO_VERSION}
+
+##### NOTE:
+##### Because of a current issue with the Base Image of Deno
+##### for the Alpine Linux, which seems to be caused by some
+##### incompatibilities with the musl libc, the DevContainer
+##### has to be based on Debian Linux for now.
+
+FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS builder
+
+ARG AUTHOR="Jan Rother"
+ARG DATE="2024-12"
+ARG VERSION="1.0"
+
+LABEL org.opencontainers.image.author=$AUTHOR \
+      org.opencontainers.image.date=$DATE \
+      org.opencontainers.image.version=$VERSION \
+      org.opencontainers.image.title="Deno Application" \
+      org.opencontainers.image.description="Docker Image"
+\end{codebox}
+
+\subsection{\texttt{.envcontainer/App.Dockerfile}}
+\label{subsec:BB-02-02_envcontainer-X-app-dockerfile}
+
+\begin{codebox}{Dockerfile}{.envcontainer/App.Dockerfile}
+ARG BASE_REPOSITORY=janrother
+ARG BASE_IMAGE=tac-environment
+ARG BASE_ENVIRONMENT=base
+ARG BASE_RELEASE=latest
+
+FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS base
+\end{codebox}
+
+\subsection{\texttt{.envcontainer/Dev.Dockerfile}}
+\label{subsec:BB-02-03_envcontainer-X-dev-dockerfile}
+
+\begin{codebox}{Dockerfile}{.envcontainer/Dev.Dockerfile}
+ARG BASE_REPOSITORY=docker.io/library
+ARG BASE_IMAGE=tac-environment
+ARG BASE_ENVIRONMENT=base
+ARG BASE_RELEASE=latest
+
+FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS base
+
+RUN apt update && apt update && apt install -y \
+    curl \
+    git \
+    postgresql-client \
+    unzip \
+    zip \
+    && apt clean
+
+# Dotfiles
+RUN bash -c  \
+    "$(curl -#fL https://raw.githubusercontent.com/ Toolchain-as-Code/tac-dotfiles/refs/heads/main/install.sh)"
+
+# Terminal: ZSH
+RUN apt update && \
+    apt install -y zsh fzf && \
+    chsh -s /usr/bin/zsh && \
+    apt clean
+
+# Terminal: Starship Prompt
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y -v latest
+# Terminal: Zinit
+RUN curl -sS https://raw.githubusercontent.com/ zdharma-continuum/zinit/HEAD/scripts/install.sh | sh
+# Terminal: Zinit Plugins
+RUN zsh -il
+\end{codebox}
+
+\subsection[\texttt{.github/workflows/base-environment-build-and-push.yaml}]{\texttt{.github/workflows/base-environment-...-push.yaml}}
+\label{subsec:BB-02-04_github-workflows-X-base-environment-build-and-push-yaml}
+
+\begin{codebox}{yaml}{.github/workflows/base-environment-build-and-push.yaml}
+name: Base Environment
+
+on:
+    push:
+        branches:
+            - main
+        tags:
+            - v*
+
+##### NOTE:
+##### Most steps are provided as pseudo code with only their names.
+
+jobs:
+    build:
+        name: Build Base Environment
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            -   name: Checkout Repository
+            -   name: Create Artifact Directory
+            -   name: Setup Docker Buildx
+            -   name: Debug Build Arguments
+            -   name: Build Image
+            -   name: Upload Image as Artifact
+    
+    push:
+        name: Push Base Environment
+        runs-on: ubuntu-latest
+        needs: build
+        permissions:
+            contents: read
+        steps:
+            -   name: Download Image as Artifact
+            -   name: Load Image from Artifact
+            -   name: Login to Docker Hub
+            -   name: Push Image to Docker Hub
+\end{codebox}
+
+\subsection[\texttt{.github/workflows/integration-environment-build-and-push.yaml}]{\texttt{.github/workflows/integration-environment-...-push.yaml}}
+\label{subsec:BB-02-05_github-workflows-X-integration-environment-build-and-push-yaml}
+
+\begin{codebox}{yaml}{.github/workflows/integration-environment-build-and-push.yaml}
+name: Creation Environment
+
+on:
+    workflow_run:
+        workflows: [ "Base Environment" ]
+        types:
+            - completed
+
+##### NOTE:
+##### Most steps are provided as pseudo code with only their names.
+
+jobs:
+    build:
+        name: Build Creation Environment
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        permissions:
+            contents: read
+        steps:
+            -   name: Checkout Repository
+            -   name: Setup Docker Buildx
+            -   name: Create Artifact Directory
+            -   name: Debug Build Arguments
+            -   name: Build Image
+            -   name: Upload Image as Artifact
+    
+    push:
+        name: Push Creation Environment
+        runs-on: ubuntu-latest
+        needs: build
+        permissions:
+            contents: read
+        steps:
+            -   name: Download Image as Artifact
+            -   name: Load Image from Artifact
+            -   name: Login to Docker Hub
+                uses: docker/login-action@v3
+            -   name: Push Image to Docker Hub
+\end{codebox}
+
+\subsection[\texttt{.github/workflows/creation-environment-build-and-push.yaml}]{\texttt{.github/workflows/creation-environment-...-push.yaml}}
+\label{subsec:BB-02-06_github-workflows-X-creation-environment-build-and-push-yaml}
+
+\begin{codebox}{yaml}{.github/workflows/creation-environment-build-and-push.yaml}
+name: Integration Environment
+
+on:
+    workflow_run:
+        workflows: [ "Base Environment" ]
+        types:
+            - completed
+
+##### NOTE:
+##### Most steps are provided as pseudo code with only their names.
+
+jobs:
+    build:
+        name: Build Integration Environment
+        runs-on: ubuntu-latest
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        permissions:
+            contents: read
+        steps:
+            -   name: Checkout Repository
+            -   name: Setup Docker Buildx
+            -   name: Create Artifact Directory
+            -   name: Debug Build Arguments
+            -   name: Build Image
+            -   name: Upload Image as Artifact
+    
+    push:
+        name: Push Integration Environment
+        runs-on: ubuntu-latest
+        needs: build
+        permissions:
+            contents: read
+        steps:
+            -   name: Download Image as Artifact
+            -   name: Load Image from Artifact
+            -   name: Login to Docker Hub
+            -   name: Push Image to Docker Hub
+\end{codebox}

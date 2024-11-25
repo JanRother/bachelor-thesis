@@ -1,0 +1,284 @@
+\section{Application Repository}
+\label{sec:BB-01_application-repository}
+
+\begin{figure}[H]
+    \begin{tikzpicture}[
+        grow via three points={one child at (0.5,-0.7) and
+        two children at (0.5,-0.7) and (0.5,-1.4)},
+        edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+        \node [root] {Toolchain-as-Code}
+            child { node [selected] {\hyperref[sec:BB-01_application-repository]{tac-application}}
+                child { node [folder] {.appcontainer}
+                    child { node {\hyperref[subsec:BB-01-03_appcontainer-X-dockerfile]{Dockerfile}}}
+                }
+                child [missing] {}
+                child { node [folder] {.devcontainer}
+                    child { node {db\_init.sql}}
+                    child { node {\hyperref[subsec:BB-01-04_devcontainer-X-devcontainer-json]{devcontainer.json}}}
+                    child { node {\hyperref[subsec:BB-01-05_devcontainer-X-dockerfile]{Dockerfile}}}
+                }
+                child [missing] {}
+                child [missing] {}
+                child [missing] {}
+                child { node [folder] {.github}
+                    child { node [folder] {workflows}
+                        child { node {\hyperref[subsec:BB-01-06_github-X-workflows-X-application-build-and-push-yaml]{application-build-and-push.yaml}}}
+                    }
+                }
+                child [missing] {}
+                child { node [folder] {app}
+                    child { node {.dockerignore}}
+                    child { node {\hyperref[subsec:BB-01-07_app-X-server-ts]{server.ts}}}
+                }
+                child [missing] {}
+                child [missing] {}
+                child { node [ignored] {.env}}
+                child { node {.gitattributes}}
+                child { node {.gitignore}}
+                child { node {\hyperref[subsec:BB-01-02_docker-compose-yaml]{docker-compose.yaml}}}
+                child { node {\hyperref[subsec:BB-01-01_example-env]{example.env}}}
+                child { node {LICENSE}}
+                child { node {README.md}}
+            }
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child [missing] {}
+            child { node [unselected] {\hyperref[sec:BB-02_environment-repository]{tac-environment}}}
+            child { node [unselected] {\hyperref[sec:BB-03_dotfiles-repository]{tac-dotfiles}}};
+    \end{tikzpicture}
+    \caption{Verzeichnisstruktur des Application Repositories}
+    \label{fig:p-01_directory-structure-of-application-repository}
+\end{figure}
+
+\vspace{3em}
+
+\subsection{\texttt{example.env}}
+\label{subsec:BB-01-01_example-env}
+
+\begin{codebox}{text}{example.env}
+PGHOST=db
+PGPORT=5432
+PGDATABASE=test
+PGUSER=root
+PGPASSWORD=root
+\end{codebox}
+
+\subsection{\texttt{docker-compose.yaml}}
+\label{subsec:BB-01-02_docker-compose-yaml}
+
+\begin{codebox}{yaml}{docker-compose.yaml}
+    services:
+    db:
+        image: postgres:17
+        restart: unless-stopped
+        environment:
+            - DATABASE_HOST=${PGHOST}
+            - POSTGRES_DB=${PGDATABASE}
+            - POSTGRES_USER=${PGUSER}
+            - POSTGRES_PASSWORD=${PGPASSWORD}
+        ports:
+            - "5432:5432"
+        volumes: 
+            - ./.devcontainer/db_init.sql :/docker-entrypoint-initdb.d/db_init.sql
+    app:
+        build:
+            context: .
+            dockerfile: .devcontainer/Dockerfile
+            args:
+                  # overwrites default BASE_X values from Dockerfile
+                - BASE_REPOSITORY=janrother
+                - BASE_IMAGE=tac-environment
+                - BASE_ENVIRONMENT=creation
+                - BASE_RELEASE=latest
+        environment:
+            - PGHOST=${PGHOST}
+            - PGPORT=${PGPORT}
+            - PGDATABASE=${PGDATABASE}
+            - PGUSER=${PGUSER}
+            - PGPASSWORD=${PGPASSWORD}
+        ports:
+            - "8000:8000"
+\end{codebox}
+
+\subsection{\texttt{.appcontainer/Dockerfile}}
+\label{subsec:BB-01-03_appcontainer-X-dockerfile}
+
+\begin{codebox}{Dockerfile}{.appcontainer/Dockerfile}
+ARG BASE_REPOSITORY=janrother
+ARG BASE_IMAGE=tac-environment
+ARG BASE_ENVIRONMENT=integration
+ARG BASE_RELEASE=latest
+
+FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS integration
+
+WORKDIR /app
+
+USER deno
+
+COPY ./app/server.ts .
+RUN deno install --entrypoint server.ts
+RUN deno cache server.ts
+
+EXPOSE 8000
+
+CMD ["run", "--allow-net", "--allow-read", "--allow-env", "server.ts"]
+\end{codebox}
+
+\subsection{\texttt{.devcontainer/devcontainer.json}}
+\label{subsec:BB-01-04_devcontainer-X-devcontainer-json}
+
+\begin{codebox}{json}{.devcontainer/devcontainer.json}
+{
+    "name": "TaC DevContainer",
+    "dockerComposeFile": "../docker-compose.yaml",
+    "service": "app",
+    "remoteUser": "root",
+    "workspaceFolder": "/workspace/",
+
+    "onCreateCommand": "",
+    "updateContentCommand": "apt update && apt upgrade -y",
+    "postCreateCommand": "",
+    "postStartCommand": "",
+    "postAttachCommand": "",
+  
+    "customizations": {
+    "vscode": {
+        "settings": {
+            "terminal.integrated.defaultProfile.linux": "zsh",
+            "terminal.integrated.profiles.linux": {
+                "zsh": {
+                "path": "/bin/zsh"
+                }
+            },
+            "editor.wordWrap": "on",
+            "editor.tabSize": 4
+        },
+        "extensions": [
+            "denoland.vscode-deno",
+            "ms-vscode-remote.remote-containers",
+            "github.codespaces",
+            "isudox.vscode-jetbrains-keybindings",
+            "github.copilot",
+            "github.copilot-chat"
+            // ...
+        ]
+    }
+  }
+}
+\end{codebox}
+
+\subsection{\texttt{.devcontainer/Dockerfile}}
+\label{subsec:BB-01-05_devcontainer-X-dockerfile}
+
+\begin{codebox}{Dockerfile}{.devcontainer/Dockerfile}
+ARG BASE_REPOSITORY=janrother
+ARG BASE_IMAGE=tac-environment
+ARG BASE_ENVIRONMENT=creation
+ARG BASE_RELEASE=latest
+
+FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS creation
+USER deno
+
+COPY . /workspace/.
+
+WORKDIR /workspace
+
+RUN deno install --entrypoint ./app/server.ts
+RUN deno cache ./app/server.ts
+
+EXPOSE 8000
+
+CMD ["run", "--allow-net", "--allow-read", "--allow-env", "./app/server.ts"]
+\end{codebox}
+
+\subsection{\texttt{.github/workflows/application-build-and-push.yaml}}
+\label{subsec:BB-01-06_github-X-workflows-X-application-build-and-push-yaml}
+
+\begin{codebox}{yaml}{.github/workflows/application-build-and-push.yaml (1/2)}
+name: Application
+
+on:
+    push:
+    branches:
+        - main
+    tags:
+        - v*
+    pull_request:
+    branches:
+        - main
+
+##### NOTE:
+##### Most steps are provided as pseudo code with only their names.
+
+jobs:
+    build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    permissions:
+        contents: read
+    steps:
+        - name: Checkout Repository
+        - name: Create Artifact Directory
+        - name: Setup Docker Buildx
+        - name: Debug Build Arguments
+        - name: Build Image
+          id: build
+          uses: docker/build-push-action@v6
+          with:
+              push: false
+              context: .
+              file: ./.appcontainer/Dockerfile
+              tags: ${{ vars.REPOSITORY }}/${{ vars.IMAGE }}:latest
+              build-args: |
+              # Arguments from GitHub Actions vars.X or as fixed values.
+              outputs: type=docker,dest=${{ runner.temp }}/artifacts/application.tar
+        - name: Upload Image as Artifact
+\end{codebox}
+
+\begin{codebox}{yaml}{.github/workflows/application-build-and-push.yaml [2/2]}
+    push:
+    name: Push Application
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+        contents: read
+    steps:
+        - name: Download Image as Artifact
+        - name: Load Image from Artifact
+        - name: Login to Docker Hub
+          uses: docker/login-action@v3
+          with:
+              username: ${{ secrets.DOCKER_USERNAME }}
+              password: ${{ secrets.DOCKER_TOKEN }}
+        - name: Push Image to Docker Hub  
+\end{codebox}
+
+\subsection{\texttt{app/server.ts}}
+\label{subsec:BB-01-07_app-X-server-ts}
+
+\begin{codebox}{typescript}{app/server.ts}
+import postgres from "https://deno.land/x/postgresjs/mod.js";
+
+const sql = postgres();
+
+Deno.serve(async (_req) => {
+    const result = await sql`SELECT * FROM bachelor_thesis`;
+    return new Response(JSON.stringify(result));
+});    
+\end{codebox}

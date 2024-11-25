@@ -1,5 +1,39 @@
 \chapter{Quellcode des Prototypen}
 \label{ch:BB_source-code-of-prototype}
 
-% replace text with content here
-Anhang
+Der Prototyp befindet sich als quelloffenes Projekt in mehreren Repositories einer \textit{GitHub Organization} und kann über \url{https://github.com/Toolchain-as-Code/} aufgerufen werden. Dabei besteht das Projekt aus drei Hauptkomponenten, abgelegt in je einem dedizierten Repository.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ >{\bfseries\raggedright}p{0.3\textwidth} >{}p{0.7\textwidth} }
+        Application Repository &
+        \url{https://github.com/Toolchain-as-Code/tac-application} \\
+        Environment Repository &
+        \url{https://github.com/Toolchain-as-Code/tac-environment} \\
+        Dotfiles Repository &
+        \url{https://github.com/Toolchain-as-Code/tac-dotfiles} \\
+    \end{tabular}
+\end{table}
+
+Die einzelnen Repositories hängen dabei zusammen wie in \autoref{fig:p-00_structure-of-project} dargestellt.
+
+\begin{figure}[H]
+    \begin{tikzpicture}[
+        grow via three points={one child at (0.5,-0.7) and
+        two children at (0.5,-0.7) and (0.5,-1.4)},
+        edge from parent path={(\tikzparentnode.south) |- (\tikzchildnode.west)}]
+
+        \node [root] {Toolchain-as-Code}
+            child { node [unselected] {\hyperref[sec:BB-01_application-repository]{tac-application}}}
+            child { node [unselected] {\hyperref[sec:BB-02_environment-repository]{tac-environment}}}
+            child { node [unselected] {\hyperref[sec:BB-03_dotfiles-repository]{tac-dotfiles}}};
+    \end{tikzpicture}
+    \caption{Struktur des Projekts}
+    \label{fig:p-00_structure-of-project}
+\end{figure}
+
+In den folgenden Abschnitten ist jedes Repository mit seiner vollständigen Verzeichnisstruktur aufgeführt. Außerdem wird der Quellcode der für die Umsetzung des Prototypen relevantesten Dateien dokumentiert. Irrelevante Zeilen können dabei entfernt oder gekürzt sein.
+
+\input{./chapters/BB/01_application-repository.tex}     \clearpage
+\input{./chapters/BB/02_environment-repository.tex}     \clearpage
+\input{./chapters/BB/03_dotfiles-repository.tex}        \clearpage
