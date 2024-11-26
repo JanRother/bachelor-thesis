@@ -75,6 +75,7 @@
 	\input{./chapters/04/_requirements-for-development-and-deployment-environments.tex}
 	\addtocontents{toc}{\protect\newpage}
 	\input{./chapters/05/_toolchain-as-code.tex}
+	\addtocontents{lof}{\protect\newpage}
 	\input{./chapters/06/_prototypical-implementation-of-the-concept.tex}
 	\input{./chapters/07/_conclusion-and-outlook.tex}
 
@@ -87,12 +88,16 @@
 	\addcontentsline{toc}{chapter}{Literaturverzeichnis}
 	\printbibliography
 
-	\clearpage\phantomsection
-	\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
-	\listoffigures
-	\clearpage\phantomsection
-	\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
-	\listoftables
+	\begingroup
+		\clearpage\phantomsection
+		\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+		\listoffigures
+		%\let\clearpage\relax
+		%\let\cleardoublepage\relax
+		\clearpage\phantomsection
+		\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+		\listoftables
+	\endgroup
 	
 	\clearpage
 
