@@ -1,23 +1,129 @@
 \section{Umsetzung einer Toolchain-as-Code Konfiguration}
 \label{sec:06-02_implementation-of-a-toolchain-as-code-configuration}
 
-% place content here
-Inhalt
+Der Prototyp befindet sich als quelloffenes Projekt in mehreren Repositories einer \textit{GitHub Organization} und kann über \url{https://github.com/Toolchain-as-Code/} aufgerufen werden. Dabei besteht das Projekt aus drei Hauptkomponenten, abgelegt in je einem dedizierten Repository (siehe \autoref{fig:s-00_overview-repositories-github-organization}), deren Zwecke sich an der \nameref{ch:05_toolchain-as-code} Strategie ausrichten.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ >{\bfseries\raggedright}p{0.3\textwidth} >{}p{0.7\textwidth} }
+        Application Repository &
+        \url{https://github.com/Toolchain-as-Code/tac-application} \\
+        Environment Repository &
+        \url{https://github.com/Toolchain-as-Code/tac-environment} \\
+        Dotfiles Repository &
+        \url{https://github.com/Toolchain-as-Code/tac-dotfiles} \\
+    \end{tabular}
+\end{table}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.95\textwidth]{s-00_overview-repositories-github-organization.png}
+    \caption{Übersicht über Repositories in \textit{GitHub} Organisation}
+    \label{fig:s-00_overview-repositories-github-organization}
+\end{figure}
+
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \vspace{-20pt}
+    \centering
+    \includegraphics[width=0.39\textwidth]{s-01_using-template-repository.png}
+    \caption{Verwendung eines Template Repositories}
+    \label{fig:s-01_using-template-repository}
+    \vspace{-00pt}
+\end{wrapfigure}
+
+Jedes Repository ist als sogenanntes \q{Template Repository} konfiguriert, sodass es von grundsätzlich jedem \textit{GitHub} Nutzer als Vorlage bei der Erstellung eines neuen Repositorys verwendet werden kann. In dem Fall werden alle Dateien und Verzeichnisse des Template Repositorys in das neue Repository kopiert. \autoref{fig:s-01_using-template-repository} zeigt, wie direkt in \textit{GitHub} mittels weniger Klicks ein neues Repository oder ein \textit{GitHub Codespace} auf Basis des Template Repositorys erstellt werden kann. Dank einer \textit{MIT License} kann das Projekt von jedem Nutzer frei verwendet, modifiziert und weitergegeben werden.
+
+Jedes Repository enthält standardmäßig vier Dateien, die teilweise zur Konfiguration und teilweise zur Dokumentation dienen. Eine \texttt{README.md} Datei enthält eine kurze Beschreibung des Repositorys und eine Anleitung zu dessen Verwendung, während eine \texttt{LICENSE} Datei die Lizenz des Projekts festlegt. Da das \Gls{vcs} \Gls{git} verwendet wird, ist eine \texttt{.gitignore} Datei enthalten, mit deren Hilfe bestimmte Dateien und Verzeichnisse von der Versionskontrolle ausgeschlossen werden können. Spezifischere Konfigurationen sind in einer \texttt{.gitattributes} Datei angegeben, welche beispielsweise den Typ der Zeilenumbrüche für verschiedene Betriebssysteme verwaltet.
+
+Alle weiteren Dateien unterscheiden sich abhängig von der Art des Repositories. In den folgenden Abschnitten werden daher Aufbau und Inhalt der einzelnen Repositories genauer beschrieben. Dabei wird auch auf Ausschnitte aus dem Quellcode des Projekts eingegangen. Der vollständige Quellcode der relevantesten Dateien befindet sich in \autoref{ch:BB_source-code-of-prototype} dieser Arbeit.
 
 \subsection{Dotfiles Repository}
 \label{subsec:06-02-01_dotfiles-repository}
 
-% place content here
-Inhalt
+Die Struktur der Verzeichnisse sowie der Quellcode ausgewälter Dateien des \nameref{sec:BB-03_dotfiles-repository} sind in \autoref{sec:BB-03_dotfiles-repository} von \autoref{ch:BB_source-code-of-prototype} beigefügt und werden hier teilweise aufgegriffen. Grundlagen zum Dotfiles Repositorys sind in \autoref{subsubsec:05-02-02-01_data-storage-in-repositories} beschrieben.
+
+Das wichtigste Element eines Dotfile Repositorys sind die Konfigurationsdateien, also die Dotfiles. Sie liegen unter \texttt{configs/} ab und sind so angeordnet, dass sie ausgehend von dort das \texttt{\$HOME} Verzeichnis eines Nutzers abbilden. Im minimalen Repository aus dem Prototypen sind zwei solcher Dateien enthalten, wovon sich eine in einem Unterordner befindet. Die Datei \texttt{.zshrc} richtet die in der Umgebung verfügbare \textit{ZSH} Shell ein, während \texttt{.config/starship.toml} die Konfiguration einer individuellen Schnittstelle zu dieser Shell definiert.
+
+Ein ebenfalls vorhandenes Skript \nameref{subsec:BB-03-01_install-sh} dient der automatischen Installation dieser Konfigurationsdateien. Es lädt dazu das Dotfiles Repository als Archiv herunter, entpackt es lokal und kopiert alle enthaltenen Dateien in ihre gespiegelten Pfade im \texttt{\$HOME} Verzeichnis. Das Skript kann direkt von \textit{GitHub} aus ausgeführt werden, indem folgender Befehl verwendet wird:
+
+\begin{codebox}{Bash}{Befehl zum Ausführen des Installationsskripts der Dotfiles}
+    bash -c $(curl -#fL https://raw.githubusercontent.com/Toolchain-as-Code/ tac-dotfiles/refs/heads/main/install.sh)
+\end{codebox}
 
 \subsection{Environment Repository}
 \label{subsec:06-02-02_environment-repository}
 
-% place content here
-Inhalt
+Die Struktur der Verzeichnisse sowie der Quellcode ausgewälter Dateien des \nameref{sec:BB-02_environment-repository} sind in \autoref{sec:BB-02_environment-repository} von \autoref{ch:BB_source-code-of-prototype} beigefügt und werden hier teilweise aufgegriffen. Grundlagen zum Environment Repositorys sind in \autoref{subsubsec:05-02-02-01_data-storage-in-repositories} beschrieben.
+
+Im Application Repository sind unter \texttt{.envcontainer/} insgesamt drei Dockerfiles enthalten: \nameref{subsec:BB-02-02_envcontainer-X-app-dockerfile} für das spätere Integration Environment mit minimalen Abhängigkeiten, \nameref{subsec:BB-02-03_envcontainer-X-dev-dockerfile} für das erweiterte Creation Environment und \nameref{subsec:BB-02-01_envcontainer-X-base-dockerfile} als gemeinsame Basis für beide Umgebungen.
+
+\begin{codebox}{Dockerfile}{\texttt{FROM}-Instruktion und Argumente der Dockerfiles}
+ARG BASE_REPOSITORY=docker.io/library
+ARG BASE_IMAGE=tac-environment
+ARG BASE_ENVIRONMENT=base
+ARG BASE_RELEASE=latest
+
+FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS base
+\end{codebox}
+
+Die \texttt{FROM}-Instruktionen zur Angabe des Base \Glspl{image} sind in allen Dockerfiles identisch. Sie verwenden sogenannte \q{\Gls{build} Args}, welche den Ort und die Version des Base \Glspl{image} angeben. Diese Werte sind bereits so vorbelegt, dass ein lokaler \Gls{build} des Docker \Glspl{image} möglich ist, andere Umgebungen sie jedoch überschreiben können.
+
+Das \nameref{subsec:BB-02-01_envcontainer-X-base-dockerfile} selbst basiert wiederum auf einem speziell auf die Softwareentwicklung mit \textit{Deno} zugeschnittenen \Gls{image}: \texttt{denoland/deno:debian-2.1.0}. Dieses enthält die \textit{Deno} Laufzeitumgebung in der Version 2.1.0 und basiert auf der \textit{Debian} \textit{Linux} Distribution. Im Rahmen des Prototypen stellt das \nameref{subsec:BB-02-02_envcontainer-X-app-dockerfile} keine reale Erweiterung dar, wurde zur semantischen Vollständigkeit und besseren Anpassbarkeit jedoch hinzugefügt. Das \nameref{subsec:BB-02-03_envcontainer-X-dev-dockerfile} erweitert das Base \Gls{image} um verschiedene Werkzeuge, die für die Entwicklung nützlich sind. Neben den Paketen \textit{curl}, \textit{git}, \textit{postgresql-client}, \textit{unzip} und \textit{zip} installiert es außerdem die \textit{ZSH} Shell inklusive zusätzlicher Erweiterungen. Deren Konfiguration wird durch die Installation der Dotfiles abgeschlossen.
+
+\begin{codebox}{Dockerfile}{Auszug aus .envcontainer/Dev.Dockerfile}
+RUN apt update && apt update && apt install -y \
+    curl git postgresql-client unzip zip \
+    && apt clean
+
+RUN bash -c "$(curl -#fL https://raw.githubusercontent.com/ Toolchain-as-Code/tac-dotfiles/refs/heads/main/install.sh)"
+
+RUN apt update && \
+    apt install -y zsh fzf && \
+    chsh -s /usr/bin/zsh && \
+    apt clean
+RUN curl -sS https://starship.rs/install.sh | sh -s -- -y -v latest
+RUN curl -sS https://raw.githubusercontent.com/ zdharma-continuum/zinit/HEAD/scripts/install.sh | sh
+RUN zsh -il
+\end{codebox}
+
+Damit für alle Umgebungen \Gls{cicd} Pipelines automatisch die entsprechenden \Glspl{image} bauen und in eine \Gls{container-registry} hochladen können, enthält das Verzeichnis \texttt{.github/workflows/} jeweils eine Datei pro Dockerfile, welche einen \textit{\Gls{github-actions}} Workflow konfiguriert (siehe \autoref{subsec:BB-02-04_github-workflows-X-base-environment-build-and-push-yaml}, \autoref{subsec:BB-02-05_github-workflows-X-integration-environment-build-and-push-yaml} und \autoref{subsec:BB-02-06_github-workflows-X-creation-environment-build-and-push-yaml}). Wird durch das \Gls{git} Repository beispielsweise ein \texttt{push} Ereignis ausgelöst, startet dies automatisch den Workflow, der das Base \Gls{image} baut und in ein Repository auf \textit{Docker Hub} hochlädt. Der Abschluss dieses Workflows löst wiederum die Pipelines aus, die für den \Gls{build} und das \Gls{deployment} von Integration und Creation Environment zuständig sind.
+
+\begin{codebox}{yaml}{Auslöser der Pipelines für die Umgebungen}
+on:
+    workflow_run:
+        workflows: [ "Base Environment" ]
+        types:
+            - completed
+\end{codebox}
 
 \subsection{Application Repository}
 \label{subsec:06-02-03_application-repository}
 
-% place content here
-Inhalt
+Die Struktur der Verzeichnisse sowie der Quellcode ausgewälter Dateien des \nameref{sec:BB-01_application-repository} sind in \autoref{sec:BB-01_application-repository} von \autoref{ch:BB_source-code-of-prototype} beigefügt und werden hier teilweise aufgegriffen. Grundlagen zum Application Repositorys sind in \autoref{subsubsec:05-02-02-01_data-storage-in-repositories} beschrieben.
+
+Das Application Repository ist aufgeteilt in \texttt{.appcontainer/}, \texttt{.devcontainer/} und \texttt{app/}, wobei \texttt{app/} den Quellcode der \textit{Deno} Anwendung in \textit{TypeScript} enthält. Die beiden anderen Verzeichnisse bestehen jeweils auf einem Dockerfile, das die Anwendung in einer spezifischen Umgebung ausführt. Das \nameref{subsec:BB-01-03_appcontainer-X-dockerfile} basiert auf dem Integration Environment und wird nur durch die \Gls{cicd} Pipeline \nameref{subsec:BB-01-06_github-X-workflows-X-application-build-and-push-yaml} gebaut. Das \nameref{subsec:BB-01-05_devcontainer-X-dockerfile} soll für die Entwicklung verwendet werden können und basiert daher auf dem Creation Environment. Die Dockerfiles ziehen die \Glspl{image} aus der \textit{GitHub} \Gls{container-registry} oder nutzen lokale \Glspl{build}.
+
+Damit die Anwendung lokal ausführbar ist, steht eine \nameref{subsec:BB-01-02_docker-compose-yaml} Datei zur Verfügung, welche neben dem bereits bestehenden Dockerfile auch eine \textit{PostgreSQL} Datenbank definiert, die mit Daten aus \texttt{.devcontainer/init\_db.sql} initialisiert wird.
+
+\begin{codebox}{yaml}{Auszug aus docker-compose.yaml}
+services:
+    db:
+        image: postgres:17
+        restart: unless-stopped
+    app:
+        build:
+            context: .
+            dockerfile: .devcontainer/Dockerfile
+\end{codebox}
+
+Der Zugang zur Datenbank muss über Umgebungsvariablen für \texttt{PGHOST}, \texttt{PGPORT}, \texttt{PGDATABASE}, \texttt{PGUSER} und \texttt{PGPASSWORD} eingerichtet werden. Dafür steht eine \texttt{example.env} Datei bereit, die als Vorlage für eine nicht im \Gls{vcs} gespeicherte \texttt{.env} Datei dient.
+
+Eine zentrale Komponente des Application Repositorys ist der \nameref{subsec:05-01-02_dev-container}, welcher über die \nameref{subsec:BB-01-04_devcontainer-X-devcontainer-json} Datei konfiguriert wird. Der \nameref{subsec:05-01-02_dev-container} basiert auf der bereits bestehenden Infrastruktur, indem er den \textit{Docker Compose Stack} in dem Editor \textit{Visual Studio Code} startet, welcher die angegebenen Erweiterungen installiert.
+
+\begin{codebox}{json}{Auszug aus devcontainer.json}
+{
+    "dockerComposeFile": "../docker-compose.yaml",
+    "service": "app",
+    "remoteUser": "root"
+}
+\end{codebox}
