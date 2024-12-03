@@ -14,6 +14,7 @@
     \includegraphics[scale=0.93]{./images/logos/logo_ostfalia.jpg}
     \includegraphics[scale=1.20]{./images/logos/sublogo_wf.jpg}
 
+    \vspace{0.5em}
     \hspace{1cm}
     \begin{minipage}{\dimexpr\textwidth-1.5cm\relax}
         {\Large\textsf{Fakultät \faculty}}
@@ -29,7 +30,7 @@
 
         \vspace{2em}
 
-        {\Large\textsf{\documentSubject\documentYear}}
+        {\LARGE\textsf{\documentSubject\documentYear}}
 
         \vspace{2em}
 
@@ -68,11 +69,11 @@
     \hspace{1cm}
     \begin{minipage}{\dimexpr\textwidth-1.5cm\relax}
         {\Large\textsf{
-            \ifbool{thesis}{
-                vorgelegt von \\\textbf{\documentAuthor}
-            }{
-                \textbf{Autor\ifbool{singleAuthor}{}{en}:} \\\documentAuthor
-            }}}
+            \ifbool{thesis}
+                {vorgelegt von \\\textbf{\documentAuthor}}
+                {\textbf{Autor\ifbool{singleAuthor}{}{en}:} \\\documentAuthor}
+            }
+        }
 
         \vspace{0.5cm}
 
