@@ -4,7 +4,7 @@
 \subsection{Teilkonzepte zur Realisierung}
 \label{subsec:05-02-01_sub-concepts-for-implementation}
 
-Die \nameref{ch:05_toolchain-as-code} Strategie soll sich maßgeblich an denen in \autoref{ch:03_examination-of-existing-approaches} ermittelten Anforderungen der Entwickler orientieren. Dabei soll für jede Anforderung ein Teilkonzept formuliert werden, welches auf Erkenntnissen aus vorherigen Untersuchungen der Arbeit basiert, größtenteils auf der \nameref{ch:03_examination-of-existing-approaches} (\autoref{ch:03_examination-of-existing-approaches}). Insgesamt konnte jedem der ursprünglichen Anforderungen ein Teilkonzept zugeordnet werden.
+Die \nameref{ch:05_toolchain-as-code} Strategie soll sich maßgeblich an denen in \autoref{ch:04_requirements-for-development-and-deployment-environments} ermittelten Anforderungen der Entwickler orientieren. Dabei soll für jede Anforderung ein Teilkonzept formuliert werden, welches auf Erkenntnissen aus vorherigen Untersuchungen der Arbeit basiert, größtenteils auf der \nameref{ch:03_examination-of-existing-approaches} (\autoref{ch:03_examination-of-existing-approaches}). Insgesamt konnte jedem der ursprünglichen Anforderungen ein Teilkonzept zugeordnet werden.
 
 Entsprechend diesem Vorgehen werden die Teilkonzepte, genau wie die Anforderungen, in die drei Bereiche \Gls{dev}, \Gls{dep} und \Gls{cnt} unterteilt. Ihre Sortierung entspricht der ursprünglichen Priorisierung der Anforderungen, wie in \autoref{subsec:04-02-01_procedure-for-evaluation} erklärt.
 
@@ -59,10 +59,10 @@ In \autoref{tab:concepts-continuity} sind die \nameref{tab:concepts-continuity} 
 \begin{table}[H]
     \begin{tabular}{ >{\bfseries\ttfamily}p{0.10\textwidth} >{}p{0.30\textwidth} | >{}p{0.50\textwidth} }
         CNT-0   &   Automatisierung erfolgt auf allen Ebenen über die gleichen Tools. &
-        Durch Kombination von \Gls{cicd} aus dem \hyperref[sec:03-03_gitops]{GitOps} Ansatz und \nameref{sec:02-03_containerization} ist gewährleistet, dass sowohl Integrations- und Deploymentkonfigurationen als auch Abhängigkeiten und Werkzeuge von jeder Ebene aus der gleichen Quelle bezogen werden. \\
+        Durch Kombination von \Gls{cicd} aus dem \hyperref[sec:03-03_gitops]{GitOps} Ansatz und \nameref{sec:02-03_containerization} ist gewährleistet, dass Integrations- und Deploymentkonfigurationen genauso wie Abhängigkeiten und Werkzeuge immer von der gleichen Quelle bezogen werden. \\
         \hline
         CNT-1   &   Die lokale Umgebung entspricht möglichst vollständig der Produktivumgebung. &
-        Sowohl im \Gls{development} als auch im \Gls{deployment} werden die gleichen Container und Konfigurationen verwendet. \\
+        Sowohl im \Gls{development} als auch im \Gls{deployment} werden die gleichen Container und Konfigurationen verwendet. Beim \Gls{development} steht außerdem eine Datenbank mit dem gleichen Schema und mindestens Beispieldaten zur Verfügung. \\
         \hline
         CNT-2   &   Alle Umgebungen sind mit möglichst wenig Tooleinsatz durch das Entwicklungsteam anpassbar. &
         Da gemäß \hyperref[sec:03-03_gitops]{GitOps} alle Konfigurationen im Code vorliegen, kann jeder Entwickler mit grundlegendem Verständnis von \Gls{vcs} wie \textit{Git} diese lesen und anpassen. \\
@@ -74,7 +74,7 @@ In \autoref{tab:concepts-continuity} sind die \nameref{tab:concepts-continuity} 
     \label{tab:concepts-continuity}
 \end{table}
 
-In \autoref{sec:03-05_concept-of-twelve-factor-app} wurde der Grundgedanke der \hyperref[sec:03-05_concept-of-twelve-factor-app]{Twelve-Factor-App} vorgestellt. Sie besteht aus insgesamt zwölf Faktoren, die \textit{Software as a Service} erfüllen sollte. Im Rahmen der \hyperref[sec:04-01_collection-of-requirements-using-expert-interviews]{Erhebung von Anforderungen an Development- und Deploymentumgebungen} wurden diese Faktoren durch Experten priorisiert (\acrshort{vgl}\autoref{tab:interview-results-factors-priorities}). Der als am wichtigsten bewerteten oberen Hälfte der Faktoren sollen daher \nameref{tab:concepts-factors} zugeordnet werden. Diese sind in \autoref{tab:concepts-factors} dargestellt.
+In \autoref{sec:03-05_concept-of-twelve-factor-app} wurde die \hyperref[sec:03-05_concept-of-twelve-factor-app]{Twelve-Factor-App} vorgestellt. Sie besteht aus zwölf Faktoren, die \textit{Software as a Service} erfüllen sollte. Im Rahmen der \hyperref[sec:04-01_collection-of-requirements-using-expert-interviews]{Erhebung von Anforderungen an Umgebungen} wurden diese Faktoren durch Experten priorisiert (\acrshort{vgl}\autoref{tab:interview-results-factors-priorities}). Der als am wichtigsten bewerteten oberen Hälfte dieser Faktoren sollen daher \nameref{tab:concepts-factors} zugeordnet werden. Diese sind in \autoref{tab:concepts-factors} dargestellt.
 
 \setcounter{factorno}{-1}
 \begin{table}[H]
@@ -220,7 +220,7 @@ Die genauen Bestandteile der einzelnen Umgebungen sind in \autoref{fig:g-19_envi
     \label{fig:g-20_ci-cd-concept-of-toolchain-as-code-strategy}
 \end{figure}
 
-App Container und \nameref{subsec:05-01-02_dev-container} ziehen sich zunächst das Environment Image, je nachdem entweder als Integration Image oder als Creation Image, aus der entsprechenden \Gls{container-registry} für die Umgebung. Die \nameref{subsec:05-01-02_dev-container} Konfiguration erstellt daraufhin die Developmentumgebung und klont das Application Repository. Ein Push in das Application Repository, unabhängig davon, ob er aus einem \nameref{subsec:05-01-02_dev-container} oder aus einem lokalen Arbeitsverzeichnis erfolgt, stößt die Integration, also einen Rebuild der Applikation, sowie das \Gls{deployment}, also das Hochladen des \Glspl{image} in ein entsprechendes \Gls{container-registry}, an. Das \Gls{image} der Applikation könnte von dort aus zusätzlich noch im Rahmen von \Gls{delivery} auf Stages oder für den Kunden zur Verfügung gestellt werden, dies ist jedoch kein expliziter Teil der \nameref{ch:05_toolchain-as-code} Strategie. Analog dazu stößt ein Push in das Environment Repository die Integration und das \Gls{deployment} der Umgebung an.
+App Container und \nameref{subsec:05-01-02_dev-container} \circled{0} ziehen sich zunächst das Environment Image, je nachdem entweder als Integration Image oder als Creation Image, aus der entsprechenden \Gls{container-registry} für die Umgebung. Die \nameref{subsec:05-01-02_dev-container} Konfiguration erstellt daraufhin die Developmentumgebung und \circled{1} klont das Application Repository. Ein \circled{2} Commit und Push in das Application Repository, unabhängig davon, ob sie aus einem \nameref{subsec:05-01-02_dev-container} oder aus einem lokalen Arbeitsverzeichnis erfolgen, stoßen \circled{3} die Integration, also einen Rebuild der Applikation, sowie \circled{4} das \Gls{deployment}, also das Hochladen des \Glspl{image} in ein entsprechendes \Gls{container-registry}, an. Das \Gls{image} der Applikation könnte von dort aus zusätzlich noch im Rahmen von \Gls{delivery} auf Stages oder für den Kunden zur Verfügung gestellt werden, dies ist jedoch kein expliziter Teil der \nameref{ch:05_toolchain-as-code} Strategie. Analog dazu stoßen \circled{5} Commit und Push in das Environment Repository \circled{6} die Integration und \circled{7} das \Gls{deployment} der Umgebung an.
 
 Nach erfolgreichem Bereitstellen der Umgebung als \Gls{image} könnte als weitere Automatisierung ein Rebuild der Applikation auf Basis der neuen Umgebung angestoßen werden. Änderungen an der Umgebung sind generell kritischer als Änderungen an der Applikation (wie von \texttt{\hyperref[sec:AA-02_interview-persons]{IP-3}} ausgesagt, \acrshort{vgl} \autoref{subsec:AA-03-01_open-questions}), da diese immer beide Images betreffen. Hochladen eines neuen Images der Umgebung könnte daher noch eine manuelle Bestätigung enthalten. 
 
