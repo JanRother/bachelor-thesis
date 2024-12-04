@@ -42,11 +42,11 @@ Alle weiteren Dateien unterscheiden sich abhängig von der Art des Repositories.
 
 Die Struktur der Verzeichnisse sowie der Quellcode ausgewälter Dateien des \nameref{sec:BB-03_dotfiles-repository} sind in \autoref{sec:BB-03_dotfiles-repository} von \autoref{ch:BB_source-code-of-prototype} beigefügt und werden hier teilweise aufgegriffen. Grundlagen zum Dotfiles Repositorys sind in \autoref{subsubsec:05-02-02-01_data-storage-in-repositories} beschrieben.
 
-Das wichtigste Element eines Dotfile Repositorys sind die Konfigurationsdateien, also die Dotfiles. Sie liegen unter \texttt{configs/} ab und sind so angeordnet, dass sie ausgehend von dort das \texttt{\$HOME} Verzeichnis eines Nutzers abbilden. Im minimalen Repository aus dem Prototypen sind zwei solcher Dateien enthalten, wovon sich eine in einem Unterordner befindet. Die Datei \texttt{.zshrc} richtet die in der Umgebung verfügbare \textit{ZSH} Shell ein, während \texttt{.config/starship.toml} die Konfiguration einer individuellen Schnittstelle zu dieser Shell definiert.
+Das wichtigste Element eines Dotfile Repositorys sind die Konfigurationsdateien, also die Dotfiles. Sie liegen unter \texttt{configs/} ab und sind so angeordnet, dass sie ausgehend von dort das \texttt{\$HOME} Verzeichnis eines Nutzers abbilden. Im minimalen Repository aus dem Prototypen sind zwei solcher Dateien enthalten, wovon sich eine in einem Unterordner befindet. Die Datei \texttt{.zshrc} richtet die in der Umgebung verfügbare \textit{ZSH} Shell ein, während \texttt{.config/starship.toml} die Konfiguration weiterer intelligenter Funktionen dieser Shell enthält.
 
 Ein ebenfalls vorhandenes Skript \nameref{subsec:BB-03-01_install-sh} dient der automatischen Installation dieser Konfigurationsdateien. Es lädt dazu das Dotfiles Repository als Archiv herunter, entpackt es lokal und kopiert alle enthaltenen Dateien in ihre gespiegelten Pfade im \texttt{\$HOME} Verzeichnis. Das Skript kann direkt von \textit{GitHub} aus ausgeführt werden, indem folgender Befehl verwendet wird:
 
-\begin{codebox}{Bash}{Befehl zum Ausführen des Installationsskripts der Dotfiles}
+\begin{codebox}{Bash}{Befehl zum Ausführen des Installationsskripts der Dotfiles im Dockerfile}
     bash -c $(curl -#fL https://raw.githubusercontent.com/Toolchain-as-Code/ tac-dotfiles/refs/heads/main/install.sh)
 \end{codebox}
 
@@ -55,7 +55,7 @@ Ein ebenfalls vorhandenes Skript \nameref{subsec:BB-03-01_install-sh} dient der 
 
 Die Struktur der Verzeichnisse sowie der Quellcode ausgewälter Dateien des \nameref{sec:BB-02_environment-repository} sind in \autoref{sec:BB-02_environment-repository} von \autoref{ch:BB_source-code-of-prototype} beigefügt und werden hier teilweise aufgegriffen. Grundlagen zum Environment Repositorys sind in \autoref{subsubsec:05-02-02-01_data-storage-in-repositories} beschrieben.
 
-Im Application Repository sind unter \texttt{.envcontainer/} insgesamt drei Dockerfiles enthalten: \nameref{subsec:BB-02-02_envcontainer-X-app-dockerfile} für das spätere Integration Environment mit minimalen Abhängigkeiten, \nameref{subsec:BB-02-03_envcontainer-X-dev-dockerfile} für das erweiterte Creation Environment und \nameref{subsec:BB-02-01_envcontainer-X-base-dockerfile} als gemeinsame Basis für beide Umgebungen.
+Im Application Repository sind unter \texttt{.envcontainer/} insgesamt drei Dockerfiles enthalten: \nameref{subsec:BB-02-02_envcontainer-X-app-dockerfile} für das spätere Integration Environment mit minimalen Abhängigkeiten, \nameref{subsec:BB-02-03_envcontainer-X-dev-dockerfile} für das erweiterte Creation Environment sowie ein notwendiges \nameref{subsec:BB-02-01_envcontainer-X-base-dockerfile} als gemeinsame Basis beider Umgebungen.
 
 \begin{codebox}{Dockerfile}{\texttt{FROM}-Instruktion und Argumente der Dockerfiles}
 ARG BASE_REPOSITORY=docker.io/library
@@ -68,7 +68,7 @@ FROM ${BASE_REPOSITORY}/${BASE_IMAGE}:${BASE_ENVIRONMENT}-${BASE_RELEASE} AS bas
 
 Die \texttt{FROM}-Instruktionen zur Angabe des Base \Glspl{image} sind in allen Dockerfiles identisch. Sie verwenden sogenannte \q{\Gls{build} Args}, welche den Ort und die Version des Base \Glspl{image} angeben. Diese Werte sind bereits so vorbelegt, dass ein lokaler \Gls{build} des Docker \Glspl{image} möglich ist, andere Umgebungen sie jedoch überschreiben können.
 
-Das \nameref{subsec:BB-02-01_envcontainer-X-base-dockerfile} selbst basiert wiederum auf einem speziell auf die Softwareentwicklung mit \textit{Deno} zugeschnittenen \Gls{image}: \texttt{denoland/deno:debian-2.1.0}. Dieses enthält die \textit{Deno} Laufzeitumgebung in der Version 2.1.0 und basiert auf der \textit{Debian} \textit{Linux} Distribution. Im Rahmen des Prototypen stellt das \nameref{subsec:BB-02-02_envcontainer-X-app-dockerfile} keine reale Erweiterung dar, wurde zur semantischen Vollständigkeit und besseren Anpassbarkeit jedoch hinzugefügt. Das \nameref{subsec:BB-02-03_envcontainer-X-dev-dockerfile} erweitert das Base \Gls{image} um verschiedene Werkzeuge, die für die Entwicklung nützlich sind. Neben den Paketen \textit{curl}, \textit{git}, \textit{postgresql-client}, \textit{unzip} und \textit{zip} installiert es außerdem die \textit{ZSH} Shell inklusive zusätzlicher Erweiterungen. Deren Konfiguration wird durch die Installation der Dotfiles abgeschlossen.
+Das \nameref{subsec:BB-02-01_envcontainer-X-base-dockerfile} selbst basiert wiederum auf einem speziell auf die Softwareentwicklung mit \textit{Deno} zugeschnittenen \Gls{image}: \texttt{denoland/deno:debian-2.1.0}. Dieses enthält die \textit{Deno} Laufzeitumgebung in der Version 2.1.0 und basiert auf der \textit{Debian} \textit{Linux} Distribution. Im Rahmen des Prototypen stellt das \nameref{subsec:BB-02-02_envcontainer-X-app-dockerfile} keine reale Erweiterung dar, wurde zur Vollständigkeit und besseren Anpassbarkeit jedoch hinzugefügt. Das \nameref{subsec:BB-02-03_envcontainer-X-dev-dockerfile} erweitert das Base \Gls{image} um verschiedene Werkzeuge, die für die Entwicklung nützlich sind. Neben den Paketen \textit{curl}, \textit{git}, \textit{postgresql-client}, \textit{unzip} und \textit{zip} installiert es außerdem die \textit{ZSH} Shell inklusive zusätzlicher Erweiterungen. Deren Konfiguration wird durch die Installation der Dotfiles abgeschlossen.
 
 \begin{codebox}{Dockerfile}{Auszug aus .envcontainer/Dev.Dockerfile}
 RUN apt update && apt update && apt install -y \
@@ -103,7 +103,7 @@ Die Struktur der Verzeichnisse sowie der Quellcode ausgewälter Dateien des \nam
 
 Das Application Repository ist aufgeteilt in \texttt{.appcontainer/}, \texttt{.devcontainer/} und \texttt{app/}, wobei \texttt{app/} den Quellcode der \textit{Deno} Anwendung in \textit{TypeScript} enthält. Die beiden anderen Verzeichnisse bestehen jeweils auf einem Dockerfile, das die Anwendung in einer spezifischen Umgebung ausführt. Das \nameref{subsec:BB-01-03_appcontainer-X-dockerfile} basiert auf dem Integration Environment und wird nur durch die \Gls{cicd} Pipeline \nameref{subsec:BB-01-06_github-X-workflows-X-application-build-and-push-yaml} gebaut. Das \nameref{subsec:BB-01-05_devcontainer-X-dockerfile} soll für die Entwicklung verwendet werden können und basiert daher auf dem Creation Environment. Die Dockerfiles ziehen die \Glspl{image} aus der \textit{GitHub} \Gls{container-registry} oder nutzen lokale \Glspl{build}.
 
-Damit die Anwendung lokal ausführbar ist, steht eine \nameref{subsec:BB-01-02_docker-compose-yaml} Datei zur Verfügung, welche neben dem bereits bestehenden Dockerfile auch eine \textit{PostgreSQL} Datenbank definiert, die mit Daten aus \texttt{.devcontainer/init\_db.sql} initialisiert wird.
+Damit die Anwendung (\texttt{app}) lokal ausführbar ist, steht eine \nameref{subsec:BB-01-02_docker-compose-yaml} Datei zur Verfügung, welche neben dem bereits bestehenden Dockerfile auch eine \textit{PostgreSQL} Datenbank (\texttt{db}) definiert, die mit Daten aus \texttt{.devcontainer/init\_db.sql} initialisiert wird.
 
 \begin{codebox}{yaml}{Auszug aus docker-compose.yaml}
 services:
@@ -120,7 +120,7 @@ Der Zugang zur Datenbank muss über Umgebungsvariablen für \texttt{PGHOST}, \te
 
 Eine zentrale Komponente des Application Repositorys ist der \nameref{subsec:05-01-02_dev-container}, welcher über die \nameref{subsec:BB-01-04_devcontainer-X-devcontainer-json} Datei konfiguriert wird. Der \nameref{subsec:05-01-02_dev-container} basiert auf der bereits bestehenden Infrastruktur, indem er den \textit{Docker Compose Stack} in dem Editor \textit{Visual Studio Code} startet, welcher die angegebenen Erweiterungen installiert.
 
-\begin{codebox}{json}{Auszug aus devcontainer.json}
+\begin{codebox}{json}{Auszug der wichtigsten Attribute aus devcontainer.json}
 {
     "dockerComposeFile": "../docker-compose.yaml",
     "service": "app",

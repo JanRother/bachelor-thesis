@@ -4,7 +4,7 @@
 \subsection{Toolchain-as-Code im Development}
 \label{subsec:06-03-01_toolchain-as-code-in-development}
 
-Durch eine abgestimmte Konfiguration kann die entwickelte Toolchain vollständig für das \Gls{development} an der Applikation eingesetzt werden. Dieser Abschnitt wird einen Einblick in die Verwendung der \nameref{ch:05_toolchain-as-code} Lösung im Bereich der Developmentumgebungen geben.
+Durch eine abgestimmte Konfiguration kann die entwickelte Toolchain vollständig für das \Gls{development} an der Applikation eingesetzt werden. Dieser Abschnitt gibt einen Einblick in die Verwendung der \nameref{ch:05_toolchain-as-code} Lösung im Bereich der Developmentumgebungen.
 
 \begin{wrapfigure}{l}{0.7\textwidth}
     \vspace{-10pt}
@@ -15,7 +15,7 @@ Durch eine abgestimmte Konfiguration kann die entwickelte Toolchain vollständig
     \vspace{-05pt}
 \end{wrapfigure}
 
-Die Einrichtung einer Entwicklungsumgebung erfolgt dank der \hyperref[sec:03-04_dotfiles]{Dotfiles} vollkommen automatisiert (siehe \autoref{fig:s-02_run-dotfiles-install-script}) schon bei der Erstellung des Creation Environments wie in \autoref{subsec:06-02-02_environment-repository} beschrieben. Dadurch steht dem Entwickler in der Developmentumgebung die bereits vorkonfigurierte \textit{ZSH} Shell (siehe \autoref{fig:s-06_extensions-dev-container}) zur Verfügung. Es wäre auch möglich, weitere Konfigurationen zu installieren und so theoretisch das gesamte System anzupassen.
+Die Einrichtung einer Entwicklungsumgebung erfolgt dank der \hyperref[sec:03-04_dotfiles]{Dotfiles} vollkommen automatisiert (siehe \autoref{fig:s-02_run-dotfiles-install-script}) schon bei der Erstellung des Creation Environments wie in \autoref{subsec:06-02-02_environment-repository} beschrieben. Dadurch steht dem Entwickler in der Developmentumgebung die bereits vorkonfigurierte \textit{ZSH} Shell (siehe \autoref{fig:s-05_shell-dev-container}) zur Verfügung. Es wäre auch möglich, weitere Konfigurationen zu installieren und so theoretisch das gesamte System anzupassen.
 
 \begin{figure}[h]
     \centering
@@ -85,12 +85,12 @@ Auf der Hauptseite des Repositorys auf \textit{GitHub} kann über das Menü \tex
     \label{fig:s-04_local-app-docker-compose}
 \end{figure}
 
-Durch die \texttt{docker-compose.yml} Datei im \texttt{.devcontainer/} Verzeichnis stehen lokal sowohl die Applikation als auch eine Datenbank als Backing Service bereit, wodurch die entwickelte Software vollständig lokal betrieben werden kann. \autoref{fig:s-09_start-github-codespace} zeigt eine Datenbankanfrage direkt über \textit{PostgreSQL}, welche problemlos möglich ist. Dadurch kann auch die Applikation selbst, also der Dienst der in \texttt{app/server.ts} definiert ist, lokal über seinen Port angesprochen werden. In \autoref{fig:s-04_local-app-docker-compose} ist dargestellt, wie eine Anfrage an \texttt{localhost:8000} gestellt wird, welches der durch den Container bereitgestellte Port ist. Das Ergebnis erhält die korrekte Antwort, die in \texttt{app/server.ts} programmiert ist.
+Durch die \texttt{docker-compose.yml} Datei im \texttt{.devcontainer/} Verzeichnis stehen lokal sowohl die Applikation als auch eine Datenbank als Backing Service bereit, wodurch die entwickelte Software vollständig lokal betrieben werden kann. \autoref{fig:s-03_local-database-docker-compose} zeigt eine Datenbankanfrage direkt über \textit{PostgreSQL}, welche problemlos möglich ist. Dadurch kann auch die Applikation selbst, also der Dienst der in \texttt{app/server.ts} definiert ist, lokal über seinen Port angesprochen werden. In \autoref{fig:s-04_local-app-docker-compose} ist dargestellt, wie eine Anfrage an \texttt{localhost:8000} gestellt wird, welches der durch den Container bereitgestellte Port ist. Das Ergebnis erhält die korrekte Antwort, die in \texttt{app/server.ts} programmiert ist.
 
 \subsection{Toolchain-as-Code im Deployment}
 \label{subsec:06-03-02_toolchain-as-code-in-deployment}
 
-Durch die \Gls{cicd} Konfiguration, die in jedem Artefakt-generierenden Repository vorhanden ist, können alle Umgebungen sowie die Applikation automatisisert durch \textit{\Gls{github-actions}} integriert und deployt werden. Dieser Abschnitt wird einen Einblick in die Verwendung der \nameref{ch:05_toolchain-as-code} Lösung im Bereich der Deploymentumgebungen geben.
+Durch die \Gls{cicd} Konfiguration, die in jedem Artefakt-generierenden Repository vorhanden ist, können alle Umgebungen sowie die Applikation automatisiert durch \textit{\Gls{github-actions}} integriert und deployt werden. Dieser Abschnitt gibt einen Einblick in die Verwendung der \nameref{ch:05_toolchain-as-code} Lösung im Bereich der Deploymentumgebungen.
 
 \begin{wrapfigure}{l}{0.4\textwidth}
     \vspace{-10pt}
